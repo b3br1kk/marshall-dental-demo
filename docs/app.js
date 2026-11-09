@@ -1,254 +1,426 @@
-(() => {
-  document.documentElement.classList.add('js');
+/* ============================================================
+   MARSHALL® Dental Studio — Studio Choreography & Interactions
+   Archetypes: Clearmed (B) + OFFLINE (D)
+   ============================================================ */
 
-  /* ---------- 1. 4-STAGE IMPLANT CROSS-SECTION ---------- */
-  const STAGES = [
+(function () {
+  "use strict";
+
+  // 1. SUITE FULL-BLEED DATA (Section 2)
+  const SUITE_STATES = [
     {
-      badge: 'ЭТАП 01 / 04',
-      duration: 'Визит 1 · 30–40 минут',
-      title: 'Компьютерная томография (КТ) и расчёт костной ткани',
-      desc: 'Хирург-имплантолог делает 3D-снимок челюсти, измеряет высоту и плотность кости до миллиметра, проверяет расположение пазух и нижнечелюстного нерва. До начала операции вы получаете поэтапный план и смету.',
-      doc: 'Хирург-имплантолог + стоматолог-ортопед',
-      note: 'Если объёма кости не хватает, врач сразу скажет, нужен ли синус-лифтинг или костная пластика'
+      tag: "01 / 03 · КОМПЬЮТЕРНАЯ ТОМОГРАФИЯ",
+      title: "Точный расчёт костной ткани до начала приёма",
+      desc: "3D-снимок показывает плотность кости, расположение гайморовых пазух и нижнечелюстного нерва с точностью до 0.08 мм. Вы получаете прозрачный поэтапный план без скрытых процедур.",
+      chips: ["3D-снимок в день обращения", "Контроль канала нерва", "Хирургический шаблон"]
     },
     {
-      badge: 'ЭТАП 02 / 04',
-      duration: 'Хирургический этап · 40–60 минут',
-      title: 'Установка титанового имплантата под местной анестезией',
-      desc: 'Через аккуратный доступ хирург формирует ложе в кости и устанавливает титановый корень. При подходящих условиях имплантат можно установить одномоментно сразу после удаления разрушенного зуба.',
-      doc: 'Стоматолог-хирург-имплантолог',
-      note: 'Внутрикостная дентальная имплантация в справочниках указана от ~38 000 ₽ (точная стоимость зависит от системы имплантата)'
+      tag: "02 / 03 · ХИРУРГИЧЕСКИЙ ПРОТОКОЛ",
+      title: "Атравматичная имплантация и костная пластика",
+      desc: "Установка внутрикостных имплантатов и синус-лифтинг проводятся под прицельным контролем КТ. Соседние здоровые зубы не обтачиваются и сохраняют живой нерв.",
+      chips: ["Внутрикостные системы Ti", "Синус-лифтинг", "Бережная анестезия"]
     },
     {
-      badge: 'ЭТАП 03 / 04',
-      duration: 'Остеоинтеграция · 3–6 месяцев',
-      title: 'Приживление имплантата и формирование контура десны',
-      desc: 'Костная ткань плотно срастается с микрорезьбой титанового имплантата. Перед протезированием устанавливается формирователь десны, а затем соединительный элемент — абатмент.',
-      doc: 'Контрольный снимок у хирурга и переход к ортопеду',
-      note: 'На нижней челюсти приживление обычно идёт быстрее (3–4 мес.), на верхней — 4–6 мес.'
-    },
-    {
-      badge: 'ЭТАП 04 / 04',
-      duration: 'Ортопедический этап · 2 визита',
-      title: 'Фиксация постоянной коронки на абатменте',
-      desc: 'Стоматолог-ортопед снимает слепки, подбирает цвет в тон соседним зубам и фиксирует коронку. Новый зуб полностью берёт на себя жевательную нагрузку без обточки соседних зубов.',
-      doc: 'Стоматолог-ортопед',
-      note: 'Винтовая или цементная фиксация по показаниям; регулярный профосмотр раз в полгода'
+      tag: "03 / 03 · ЭСТЕТИЧЕСКАЯ ОРТОПЕДИЯ",
+      title: "Естественная полупрозрачность циркония и E.max",
+      desc: "Подбираем тон и микрорельеф коронки по эталонной палитре VITA 3D-Master, чтобы реставрация пропускала свет точно так же, как собственная зубная эмаль.",
+      chips: ["Диоксид циркония", "Цельная керамика E.max", "Точность посадки 20 мкм"]
     }
   ];
 
-  const stageTabs = document.getElementById('stage-tabs');
-  const implantSvg = document.getElementById('implant-svg');
-
-  function setStage(idx) {
-    const s = STAGES[idx];
-    if (!s) return;
-    if (implantSvg) implantSvg.setAttribute('data-stage', String(idx));
-    if (stageTabs) {
-      stageTabs.querySelectorAll('.stage-tab').forEach((btn, i) => {
-        btn.setAttribute('aria-selected', String(i === idx));
-      });
-    }
-    const badge = document.getElementById('stage-badge');
-    const dur = document.getElementById('stage-duration');
-    const title = document.getElementById('stage-title');
-    const desc = document.getElementById('stage-desc');
-    const doc = document.getElementById('stage-doc');
-    const note = document.getElementById('stage-note');
-
-    if (badge) badge.textContent = s.badge;
-    if (dur) dur.textContent = s.duration;
-    if (title) title.textContent = s.title;
-    if (desc) desc.textContent = s.desc;
-    if (doc) doc.textContent = s.doc;
-    if (note) note.textContent = s.note;
-  }
-
-  if (stageTabs) {
-    stageTabs.querySelectorAll('.stage-tab').forEach((btn, idx) => {
-      btn.addEventListener('click', () => setStage(idx));
-      btn.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          const next = (idx + 1) % STAGES.length;
-          setStage(next);
-          stageTabs.children[next]?.focus();
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          const prev = (idx - 1 + STAGES.length) % STAGES.length;
-          setStage(prev);
-          stageTabs.children[prev]?.focus();
-        }
-      });
-    });
-  }
-
-  /* ---------- 2. CLINICAL ROUTE CONFIGURATOR ---------- */
-  const ROUTES = {
-    single: {
-      tag: 'ПРОТОКОЛ · ОДИНОЧНАЯ РЕСТАВРАЦИЯ',
-      price: 'Ориентир: внутрикостная имплантация от ~38 000 ₽ (справочники)',
-      title: 'Восстановление одного зуба без обточки соседних',
-      desc: 'В отличие от мостовидного протеза, соседние здоровые зубы не депульпируют и не обтачивают. В кость устанавливается титановый корень, а после приживления фиксируется коронка.',
-      steps: [
-        'Осмотр хирурга-имплантолога и компьютерная томография (КТ) челюсти в клинике.',
-        'Установка внутрикостного дентального имплантата под местной анестезией (или одномоментно с удалением корня, если позволяет кость).',
-        'Фиксация формирователя десны, снятие слепков у ортопеда и установка постоянной коронки.'
-      ],
-      doc: 'Хирург-имплантолог + стоматолог-ортопед',
-      formLine: 'Маршрут: восстановление 1 зуба на имплантате (нужна КТ-консультация).'
+  // 2. STUDIO PODIUM & CLINICAL RECEIPT DATA (Section 3 — OFFLINE Archetype)
+  const PODIUM_CASES = [
+    {
+      watermark: "01: IMPLANT MONOLITH",
+      code: "ПРОТОКОЛ #M-01 · ИМПЛАНТАЦИЯ",
+      visits: "3–4 ВИЗИТА",
+      title: "Восстановление одного зуба без обточки соседних",
+      desc: "Внутрикостный титановый имплантат с индивидуальным абатментом и коронкой из диоксида циркония.",
+      callout: "Титановый корень Grade 4 + Коронка из циркония VITA",
+      total: "38 000 ₽",
+      subnote: "Стоимость хирургического этапа установки имплантата (ортопедический этап оплачивается отдельно при фиксации коронки)",
+      formLabel: "01 · Имплантация Ti + Цирконий (от 38 000 ₽)",
+      rows: [
+        ["01. 3D КТ-диагностика и цифровой план", "ВКЛЮЧЕНО"],
+        ["02. Внутрикостный имплантат (хирургия)", "от 38 000 ₽"],
+        ["03. Формирователь десны и абатмент", "по смете"],
+        ["04. Коронка из диоксида циркония", "от 26 000 ₽"]
+      ]
     },
-    bridge: {
-      tag: 'ПРОТОКОЛ · СЕГМЕНТ ИЛИ ПОЛНАЯ ДУГА',
-      price: 'Прайс: рассчитывается индивидуально по КТ (заглушка)',
-      title: 'Восстановление нескольких отсутствующих зубов подряд',
-      desc: 'Когда нет 2–4 зубов подряд или всего зубного ряда, вместо отдельных имплантатов под каждый зуб часто устанавливают опорные имплантаты под несъёмный мост или съёмный/несъёмный протез.',
-      steps: [
-        '3D КТ обеих челюстей и совместная консультация хирурга-имплантолога и стоматолога-ортопеда.',
-        'Оценка объёма кости, при необходимости — синус-лифтинг или костная пластика.',
-        'Установка опорных имплантатов и изготовление ортопедической конструкции.'
-      ],
-      doc: 'Консилиум: стоматолог-ортопед + хирург-имплантолог',
-      formLine: 'Маршрут: протезирование нескольких отсутствующих зубов на имплантатах.'
+    {
+      watermark: "02: E.MAX CERAMIC",
+      code: "ПРОТОКОЛ #M-02 · ОРТОПЕДИЯ",
+      visits: "2–3 ВИЗИТА",
+      title: "Цельнокерамические коронки E.max и диоксид циркония",
+      desc: "Восстановление разрушенных зубов и эстетики зоны улыбки без тёмного металлического края у десны.",
+      callout: "Многослойная керамика E.max с живой светопроницаемостью",
+      total: "26 000 ₽",
+      subnote: "Ориентир за единицу безметалловой реставрации (точная смета после очного осмотра)",
+      formLabel: "02 · Коронки из циркония и керамика E.max (от 26 000 ₽)",
+      rows: [
+        ["01. Осмотр ортопеда и фотопротокол VITA", "ВКЛЮЧЕНО"],
+        ["02. Временная эстетическая коронка", "от 4 500 ₽"],
+        ["03. Цифровое моделирование прикуса", "ВКЛЮЧЕНО"],
+        ["04. Коронка Цирконий / Керамика E.max", "от 26 000 ₽"]
+      ]
     },
-    wisdom: {
-      tag: 'ПРОТОКОЛ · АТРАВМАТИЧНАЯ ХИРУРГИЯ',
-      price: 'Прайс на удаление: заглушка (зависит от сложности)',
-      title: 'Удаление сложного или ретинированного зуба мудрости',
-      desc: 'Восьмые зубы часто растут под наклоном, упираются в соседнюю «семёрку» или лежат близко к нижнечелюстному нерву. Перед удалением хирург смотрит положение корней на снимке.',
-      steps: [
-        'Прицельный рентген-снимок или 3D КТ для точного определения формы корней и близости нерва.',
-        'Местная анестезия и бережное разделение зуба без лишней травмы окружающей кости.',
-        'Наложение швов, подробная памятка по уходу и контрольный осмотр.'
-      ],
-      doc: 'Стоматолог-хирург',
-      formLine: 'Маршрут: консультация хирурга и удаление зуба мудрости по снимку.'
+    {
+      watermark: "03: 3D CBCT SURGERY",
+      code: "ПРОТОКОЛ #M-03 · ЧЛХ & 3D КТ",
+      visits: "1 ВИЗИТ (40 МИН)",
+      title: "Сложное удаление зуба мудрости под контролем 3D КТ",
+      desc: "Атравматичное удаление ретинированных и дистопированных восьмёрок с сохранением костной стенки.",
+      callout: "Оптический контроль положения нижнечелюстного нерва",
+      total: "8 500 ₽",
+      subnote: "Ориентир за сложное хирургическое удаление с учётом прицельной 3D-диагностики",
+      formLabel: "03 · 3D КТ и удаление зуба мудрости (от 8 500 ₽)",
+      rows: [
+        ["01. 3D КТ-снимок области восьмёрки", "ВКЛЮЧЕНО"],
+        ["02. Проводниковая анестезия", "ВКЛЮЧЕНО"],
+        ["03. Атравматичное разделение корней", "от 8 500 ₽"],
+        ["04. Контрольный осмотр и снятие швов", "0 ₽"]
+      ]
     },
-    ortho: {
-      tag: 'ПРОТОКОЛ · ИСПРАВЛЕНИЕ ПРИКУСА',
-      price: 'Прайс на ортодонтию: заглушка до сверки с клиникой',
-      title: 'Выравнивание зубов брекетами или элайнерами',
-      desc: 'Ортодонтическое лечение нужно не только для ровной улыбки, но и чтобы раздвинуть наклонившиеся зубы перед установкой имплантата или коронки.',
-      steps: [
-        'Диагностика прикуса, снимки челюстей и составление плана перемещения зубов.',
-        'Санация полости рта (лечение кариеса и профессиональная гигиена) перед фиксацией.',
-        'Установка брекет-системы или выдача набора прозрачных капп-элайнеров с плановыми активациями.'
-      ],
-      doc: 'Стоматолог-ортодонт',
-      formLine: 'Маршрут: консультация ортодонта (брекет-системы / элайнеры).'
+    {
+      watermark: "04: CLEAR ALIGNER",
+      code: "ПРОТОКОЛ #M-04 · ОРТОДОНТИЯ",
+      visits: "КУРС ОТ 6 МЕС.",
+      title: "Исправление прикуса элайнерами и брекет-системами",
+      desc: "Пошаговое выравнивание зубного ряда прозрачными съёмными капами или самолигирующими брекетами.",
+      callout: "Биополимерные прозрачные капы с 3D-прогнозом улыбки",
+      total: "42 000 ₽",
+      subnote: "Ориентир за стартовый ортодонтический этап и 3D-расчёт перемещения зубов",
+      formLabel: "04 · Элайнеры и коррекция прикуса (от 42 000 ₽)",
+      rows: [
+        ["01. 3D КТ обеих челюстей и ВНЧС", "ВКЛЮЧЕНО"],
+        ["02. Цифровой сетап перемещения зубов", "от 14 000 ₽"],
+        ["03. Фиксация системы / комплект кап", "от 42 000 ₽"],
+        ["04. Плановые активации у ортодонта", "по графику"]
+      ]
     }
-  };
+  ];
 
-  let currentCase = 'single';
-  const routeList = document.getElementById('route-list');
+  const JOURNEY_CAPTIONS = [
+    "Визит 01 · Осмотр и 3D-снимок",
+    "Визит 02 · Бережная хирургия и имплантация",
+    "Визит 03 · Подбор оттенка по шкале VITA 3D",
+    "Визит 04 · Фиксация керамики и паспорт"
+  ];
 
-  function setRoute(key) {
-    const r = ROUTES[key];
-    if (!r) return;
-    currentCase = key;
-    if (routeList) {
-      routeList.querySelectorAll('.route-item').forEach((btn) => {
-        btn.setAttribute('aria-checked', String(btn.dataset.case === key));
+  // ============================================================
+  // SUITE SWITCHER (Section 2)
+  // ============================================================
+  const suitePills = document.querySelectorAll(".suite-pill");
+  const suiteTag = document.getElementById("suite-tag");
+  const suiteTitle = document.getElementById("suite-card-title");
+  const suiteDesc = document.getElementById("suite-card-desc");
+  const suiteChips = document.getElementById("suite-chips");
+
+  suitePills.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const idx = Number(btn.dataset.suite || 0);
+      const data = SUITE_STATES[idx] || SUITE_STATES[0];
+      suitePills.forEach((p, i) => {
+        p.classList.toggle("is-active", i === idx);
+        p.setAttribute("aria-selected", String(i === idx));
       });
-    }
-    document.getElementById('rc-tag').textContent = r.tag;
-    document.getElementById('rc-price').textContent = r.price;
-    document.getElementById('rc-title').textContent = r.title;
-    document.getElementById('rc-desc').textContent = r.desc;
-    document.getElementById('rc-doc').textContent = r.doc;
-    const stepsEl = document.getElementById('rc-steps');
-    if (stepsEl) {
-      stepsEl.innerHTML = r.steps
-        .map((st, i) => `<li><b>Шаг ${i + 1}.</b> ${st}</li>`)
-        .join('');
-    }
-  }
-
-  if (routeList) {
-    routeList.querySelectorAll('.route-item').forEach((btn) => {
-      btn.addEventListener('click', () => setRoute(btn.dataset.case));
-    });
-  }
-
-  const rcApply = document.getElementById('rc-apply');
-  if (rcApply) {
-    rcApply.addEventListener('click', () => {
-      const r = ROUTES[currentCase];
-      const note = document.getElementById('f-note');
-      if (note && r) {
-        note.value = r.formLine;
+      if (suiteTag) suiteTag.textContent = data.tag;
+      if (suiteTitle) suiteTitle.textContent = data.title;
+      if (suiteDesc) suiteDesc.textContent = data.desc;
+      if (suiteChips) {
+        suiteChips.innerHTML = data.chips.map((c) => `<span>${c}</span>`).join("");
       }
-      setTimeout(() => document.getElementById('f-name')?.focus({ preventScroll: true }), 350);
+    });
+  });
+
+  // ============================================================
+  // SIGNATURE INTERACTION: PODIUM & RECEIPT DRAWER (Section 3)
+  // ============================================================
+  const studioStage = document.getElementById("studio-stage");
+  const podiumItems = document.querySelectorAll(".podium-item");
+  const dockPills = document.querySelectorAll(".dock-pill");
+  const stageWatermark = document.getElementById("stage-watermark");
+  const stageResetBtn = document.getElementById("stage-reset");
+  const receiptCloseBtn = document.getElementById("receipt-close");
+  const calloutText = document.getElementById("callout-text");
+
+  const rcCode = document.getElementById("rc-code");
+  const rcVisits = document.getElementById("rc-visits");
+  const rcTitle = document.getElementById("rc-title");
+  const rcDesc = document.getElementById("rc-desc");
+  const rcRows = document.getElementById("rc-rows");
+  const rcTotal = document.getElementById("rc-total");
+  const rcSubnote = document.getElementById("rc-subnote");
+  const rcApplyBtn = document.getElementById("rc-apply-btn");
+  const formProtocolOut = document.getElementById("form-protocol-out");
+
+  let activeCaseIndex = null;
+
+  function renderReceipt(index) {
+    const item = PODIUM_CASES[index];
+    if (!item) return;
+    activeCaseIndex = index;
+
+    studioStage.classList.add("has-active");
+    if (stageResetBtn) stageResetBtn.hidden = false;
+    if (stageWatermark) stageWatermark.textContent = item.watermark;
+    if (calloutText) calloutText.textContent = item.callout;
+
+    podiumItems.forEach((el, i) => {
+      el.classList.toggle("is-selected", i === index);
+    });
+    dockPills.forEach((pill, i) => {
+      pill.setAttribute("aria-selected", String(i === index));
+    });
+
+    if (rcCode) rcCode.textContent = item.code;
+    if (rcVisits) rcVisits.textContent = item.visits;
+    if (rcTitle) rcTitle.textContent = item.title;
+    if (rcDesc) rcDesc.textContent = item.desc;
+    if (rcTotal) rcTotal.textContent = item.total;
+    if (rcSubnote) rcSubnote.textContent = item.subnote;
+
+    if (rcRows) {
+      rcRows.innerHTML = item.rows
+        .map(([name, val]) => `<div class="receipt__row"><span>${name}</span><span>${val}</span></div>`)
+        .join("");
+    }
+
+    if (formProtocolOut) {
+      formProtocolOut.textContent = item.formLabel;
+    }
+  }
+
+  function resetStudioStage() {
+    activeCaseIndex = null;
+    studioStage.classList.remove("has-active");
+    if (stageResetBtn) stageResetBtn.hidden = true;
+    if (stageWatermark) stageWatermark.textContent = "MARSHALL STUDIO · 01–04";
+    podiumItems.forEach((el) => el.classList.remove("is-selected"));
+    dockPills.forEach((pill) => pill.setAttribute("aria-selected", "false"));
+  }
+
+  podiumItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const idx = Number(item.dataset.case || 0);
+      if (activeCaseIndex === idx) {
+        resetStudioStage();
+      } else {
+        renderReceipt(idx);
+      }
+    });
+  });
+
+  dockPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      const idx = Number(pill.dataset.dock || 0);
+      renderReceipt(idx);
+    });
+  });
+
+  if (stageResetBtn) stageResetBtn.addEventListener("click", resetStudioStage);
+  if (receiptCloseBtn) receiptCloseBtn.addEventListener("click", resetStudioStage);
+
+  if (rcApplyBtn) {
+    rcApplyBtn.addEventListener("click", () => {
+      const bookingEl = document.getElementById("booking");
+      if (bookingEl) bookingEl.scrollIntoView({ behavior: "smooth" });
+      const nameInput = document.getElementById("inp-name");
+      if (nameInput) setTimeout(() => nameInput.focus(), 600);
     });
   }
 
-  /* ---------- 3. FORM & PHONE ---------- */
-  const form = document.getElementById('form');
-  const phone = document.getElementById('f-phone');
-  const nameInput = document.getElementById('f-name');
+  // ============================================================
+  // STICKY 50/50 CARE JOURNEY ACCORDION (Section 4)
+  // ============================================================
+  const jSteps = document.querySelectorAll(".j-step");
+  const jImages = document.querySelectorAll(".journey-img");
+  const jCaption = document.getElementById("journey-caption");
 
-  if (phone) {
-    phone.addEventListener('input', () => {
-      let d = phone.value.replace(/\D/g, '');
-      if (d.startsWith('8')) d = '7' + d.slice(1);
-      if (!d.startsWith('7')) d = '7' + d;
-      d = d.slice(0, 11);
-      const p = d.slice(1);
-      let out = '+7';
-      if (p.length) out += ' ' + p.slice(0, 3);
-      if (p.length > 3) out += ' ' + p.slice(3, 6);
-      if (p.length > 6) out += '-' + p.slice(6, 8);
-      if (p.length > 8) out += '-' + p.slice(8, 10);
-      phone.value = out;
-      if (phone.getAttribute('aria-invalid') === 'true' && p.length === 10) setErr(phone, false);
+  function activateJourneyStep(index) {
+    jSteps.forEach((step, i) => {
+      const open = i === index;
+      step.classList.toggle("is-open", open);
+      const btn = step.querySelector(".j-step__trigger");
+      if (btn) btn.setAttribute("aria-expanded", String(open));
     });
-  }
-
-  function setErr(input, bad) {
-    if (!input) return;
-    input.setAttribute('aria-invalid', String(bad));
-    const err = document.getElementById(input.id + '-err');
-    if (err) err.hidden = !bad;
-  }
-
-  if (nameInput) {
-    nameInput.addEventListener('input', () => {
-      if (nameInput.value.trim().length >= 2) setErr(nameInput, false);
+    jImages.forEach((img, i) => {
+      img.classList.toggle("is-active", i === index);
     });
+    if (jCaption && JOURNEY_CAPTIONS[index]) {
+      jCaption.textContent = JOURNEY_CAPTIONS[index];
+    }
   }
 
-  if (form) {
-    form.addEventListener('submit', (e) => {
+  jSteps.forEach((step, idx) => {
+    const btn = step.querySelector(".j-step__trigger");
+    if (btn) {
+      btn.addEventListener("click", () => activateJourneyStep(idx));
+    }
+  });
+
+  // ============================================================
+  // 3D ARC CARDS -> BOOKING SELECTION (Section 5)
+  // ============================================================
+  const arcCards = document.querySelectorAll(".arc-card");
+  arcCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const dept = card.dataset.dept;
+      if (dept && formProtocolOut) {
+        formProtocolOut.textContent = dept;
+      }
+      const bookingEl = document.getElementById("booking");
+      if (bookingEl) bookingEl.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // ============================================================
+  // BOOKING FORM SUBMISSION (Section 6)
+  // ============================================================
+  const bookingForm = document.getElementById("booking-form");
+  const formFeedback = document.getElementById("form-feedback");
+
+  if (bookingForm) {
+    bookingForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const nameBad = !nameInput || nameInput.value.trim().length < 2;
-      const digits = phone ? phone.value.replace(/\D/g, '') : '';
-      const phoneBad = digits.length !== 11;
-      setErr(nameInput, nameBad);
-      setErr(phone, phoneBad);
-      if (nameBad) { nameInput?.focus(); return; }
-      if (phoneBad) { phone?.focus(); return; }
-      form.hidden = true;
-      const ok = document.getElementById('form-ok');
-      if (ok) {
-        ok.hidden = false;
-        ok.focus();
+      const nameVal = (document.getElementById("inp-name")?.value || "").trim();
+      const phoneVal = (document.getElementById("inp-phone")?.value || "").trim();
+      const timeVal = document.getElementById("inp-time")?.value || "";
+      const protoVal = formProtocolOut ? formProtocolOut.textContent.trim() : "";
+
+      if (!nameVal || !phoneVal) {
+        if (formFeedback) {
+          formFeedback.hidden = false;
+          formFeedback.textContent = "Пожалуйста, укажите имя и телефон, чтобы администратор связался с вами.";
+        }
+        return;
       }
+
+      if (formFeedback) {
+        formFeedback.hidden = false;
+        formFeedback.textContent = `Заявка принята, ${nameVal}. Маршрут «${protoVal}» (${timeVal}) передан в регистратуру клиники Marshall (13 мкр, 34).`;
+      }
+      bookingForm.reset();
     });
   }
 
-  /* ---------- 4. REVEAL ON SCROLL ---------- */
-  const items = document.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (en.isIntersecting) {
-          en.target.classList.add('is-in');
-          io.unobserve(en.target);
+  // ============================================================
+  // MACRO-CHOREOGRAPHY: LENIS + GSAP SCROLLTRIGGER
+  // ============================================================
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      // 1. Lenis Smooth Inertial Scroll
+      if (typeof Lenis !== "undefined") {
+        const lenis = new Lenis({
+          duration: 1.12,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true
+        });
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      // 2. Preloader -> Hero Curtain & Scale Reveal (0.9s)
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.fromTo(
+        ".preloader__inner",
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.35 }
+      )
+        .to(".preloader", {
+          clipPath: "inset(0 0 100% 0)",
+          duration: 0.72,
+          ease: "power3.inOut",
+          delay: 0.12
+        })
+        .from(
+          "#hero-media-wrap",
+          {
+            scale: 1.07,
+            clipPath: "inset(6% 6% 6% 6% round 28px)",
+            duration: 0.88
+          },
+          "-=0.55"
+        )
+        .from(
+          ".line-inner",
+          {
+            yPercent: 108,
+            duration: 0.72,
+            stagger: 0.08
+          },
+          "-=0.68"
+        )
+        .from(
+          ".hero-anim",
+          {
+            opacity: 0,
+            y: 16,
+            duration: 0.55,
+            stagger: 0.06
+          },
+          "-=0.5"
+        )
+        .set(".preloader", { display: "none" });
+    });
+
+    // 3. Desktop Spatial Scroll Choreography
+    mm.add("(min-width: 1081px) and (prefers-reduced-motion: no-preference)", () => {
+      // 3a. Expand Suite Card from 76vw to 96vw Full-Bleed on Scroll (Clearmed 0:04)
+      gsap.fromTo(
+        "#expand-card",
+        { width: "74vw", borderRadius: "32px" },
+        {
+          width: "96vw",
+          borderRadius: "22px",
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#expand-stage",
+            start: "top 82%",
+            end: "top 18%",
+            scrub: 0.55
+          }
         }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    items.forEach((el) => io.observe(el));
+      );
+
+      // 3b. 3D Curved Arc Card Fanning (Clearmed 0:12)
+      const cards = gsap.utils.toArray(".arc-card");
+      const fanAngles = [-10, -5, 0, 5, 10];
+      const fanY = [38, 10, 0, 10, 38];
+
+      gsap.fromTo(
+        cards,
+        {
+          rotateZ: 0,
+          y: 72,
+          x: (i) => (2 - i) * 70,
+          opacity: 0.2,
+          scale: 0.92
+        },
+        {
+          rotateZ: (i) => fanAngles[i] || 0,
+          y: (i) => fanY[i] || 0,
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          ease: "power3.out",
+          stagger: 0.03,
+          scrollTrigger: {
+            trigger: "#arc-fan-stage",
+            start: "top 85%",
+            end: "top 30%",
+            scrub: 0.65
+          }
+        }
+      );
+    });
   } else {
-    items.forEach((el) => el.classList.add('is-in'));
+    const pre = document.getElementById("preloader");
+    if (pre) pre.style.display = "none";
   }
 })();
