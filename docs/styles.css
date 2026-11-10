@@ -1139,10 +1139,7 @@ button, input, select {
 }
 
 .offer-header {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 32px;
-  align-items: end;
+  display: block;
   padding-bottom: clamp(36px, 4.5vw, 56px);
   border-bottom: 1px solid var(--hairline-strong);
 }
