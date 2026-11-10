@@ -1520,140 +1520,158 @@ button, input, select {
 
 .receipt-card {
   position: relative;
-  background: #FFFFFF;
-  border: 1px solid var(--hairline-strong);
+  background: linear-gradient(180deg, #F5F2EB 0%, #FFFFFF 12%, #FCFBF8 100%);
+  border-left: 1px solid rgba(18, 17, 16, 0.16);
+  border-right: 1px solid rgba(18, 17, 16, 0.16);
   border-top: 2px solid #060504;
-  border-radius: 0 0 16px 16px;
-  padding: clamp(24px, 3vw, 34px);
-  box-shadow: 0 22px 44px -20px rgba(18, 17, 16, 0.18);
+  border-bottom: 0;
+  border-radius: 0;
+  padding: 22px 26px 24px;
+  box-shadow:
+    inset 0 12px 14px -10px rgba(0, 0, 0, 0.34),
+    0 24px 42px -18px rgba(18, 17, 16, 0.22);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
   transform-origin: top center;
   will-change: transform;
 }
 
 .receipt-card__sawtooth {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -8px;
-  height: 8px;
+  left: -1px;
+  right: -1px;
+  bottom: -10px;
+  height: 10px;
   background:
-    linear-gradient(135deg, #FFFFFF 50%, transparent 50%),
-    linear-gradient(225deg, #FFFFFF 50%, transparent 50%);
-  background-size: 14px 8px;
+    linear-gradient(135deg, #FCFBF8 50%, transparent 50%),
+    linear-gradient(225deg, #FCFBF8 50%, transparent 50%);
+  background-size: 14px 10px;
   background-repeat: repeat-x;
-  filter: drop-shadow(0 2px 1px rgba(18, 17, 16, 0.08));
+  filter: drop-shadow(0 3px 2px rgba(18, 17, 16, 0.14));
 }
 
 .receipt-card::before,
 .receipt-card::after {
   content: "";
   position: absolute;
-  top: 56%;
-  width: 20px;
-  height: 20px;
+  top: 54%;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--surface);
-  border: 1px solid var(--hairline-strong);
+  border: 1px solid rgba(18, 17, 16, 0.16);
 }
 
 .receipt-card::before {
-  left: -11px;
+  left: -9px;
   clip-path: inset(0 0 0 50%);
 }
 
 .receipt-card::after {
-  right: -11px;
+  right: -9px;
   clip-path: inset(0 50% 0 0);
 }
 
-.receipt-card__top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.receipt-card__brand {
+.receipt-card__header-center {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 3px;
 }
 
-.receipt-card__title {
-  font-size: 13px;
+.receipt-card__kassa {
+  font-size: 10.5px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+}
+
+.receipt-card__title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   color: var(--ink);
 }
 
 .receipt-card__addr {
-  font-size: 12.5px;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--ink-muted);
 }
 
-.receipt-card__badge {
-  padding: 5px 12px;
-  border-radius: var(--r-pill);
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 11px;
+.receipt-card__double-dash {
+  height: 4px;
+  border-top: 1.5px dashed rgba(18, 17, 16, 0.28);
+  border-bottom: 1.5px dashed rgba(18, 17, 16, 0.28);
+}
+
+.receipt-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+
+.receipt-card__meta strong {
+  color: var(--ink);
   font-weight: 800;
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-}
-
-.receipt-card__divider {
-  height: 1px;
-  background: var(--hairline-strong);
-  margin: 18px 0;
-}
-
-.receipt-card__divider--dashed {
-  background: none;
-  border-top: 1.5px dashed var(--hairline-strong);
 }
 
 .receipt-card__subject {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 16px;
+  gap: 3px;
 }
 
 .receipt-card__label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--accent);
 }
 
 .receipt-card__service-name {
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.25;
   color: var(--ink);
 }
 
+.receipt-card__cols-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(18, 17, 16, 0.18);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
 .receipt-card__lines {
   list-style: none;
   display: grid;
-  gap: 11px;
+  gap: 9px;
 }
 
 .receipt-card__lines li {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 14px;
-  font-size: 14px;
+  gap: 12px;
+  font-size: 13.5px;
   color: var(--ink-muted);
-  padding-bottom: 9px;
-  border-bottom: 1px dotted var(--hairline);
+  padding-bottom: 7px;
+  border-bottom: 1.5px dotted rgba(18, 17, 16, 0.22);
 }
 
 .receipt-card__lines li:last-child {
@@ -1669,41 +1687,88 @@ button, input, select {
 
 .receipt-card__totals {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .receipt-card__total-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  font-size: 14.5px;
-  font-weight: 600;
+  gap: 14px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
   color: var(--ink-muted);
 }
 
 .receipt-card__total-row strong {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--ink);
 }
 
 .receipt-card__total-row--free {
-  padding: 11px 15px;
-  border-radius: 12px;
+  padding: 9px 12px;
+  border-radius: 8px;
   background: rgba(53, 178, 111, 0.11);
-  border: 1px solid rgba(53, 178, 111, 0.32);
-  color: #1B6840;
+  border: 1px dashed rgba(53, 178, 111, 0.48);
+  color: #165B37;
 }
 
 .receipt-card__total-row--free strong {
   color: #165B37;
-  font-size: 19px;
+  font-size: 18px;
 }
 
-.receipt-card__foot {
-  margin-top: 16px;
-  font-size: 12px;
+.receipt-card__footer-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.receipt-card__stamp {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1.5px solid rgba(18, 17, 16, 0.55);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+}
+
+.receipt-card__barcode {
+  width: 82%;
+  height: 28px;
+  background: repeating-linear-gradient(
+    90deg,
+    #141312 0px,
+    #141312 2px,
+    transparent 2px,
+    transparent 5px,
+    #141312 5px,
+    #141312 6px,
+    transparent 6px,
+    transparent 9px,
+    #141312 9px,
+    #141312 13px,
+    transparent 13px,
+    transparent 15px,
+    #141312 15px,
+    #141312 17px,
+    transparent 17px,
+    transparent 21px
+  );
+  opacity: 0.82;
+}
+
+.receipt-card__code-sub {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   color: var(--ink-faint);
 }
 
@@ -1861,44 +1926,37 @@ button, input, select {
   min-height: 490px;
 }
 
+.map-widget--dark .map-widget__header,
 .map-widget__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 22px;
-  background: var(--obsidian);
-  color: var(--bg);
+  padding: 15px 22px;
+  background: #25221F;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
 }
 
 .map-widget__brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
 }
 
 .map-widget__logo {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   object-fit: cover;
   border: 1px solid rgba(213, 169, 122, 0.55);
 }
 
-.map-widget__title-wrap {
-  display: flex;
-  flex-direction: column;
-}
-
 .map-widget__title {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 800;
+  letter-spacing: -0.02em;
   color: #FFFFFF;
-}
-
-.map-widget__subtitle {
-  font-size: 12px;
-  color: #B8AEA3;
 }
 
 .map-widget__pin-badge {

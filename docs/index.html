@@ -586,19 +586,29 @@
             </div>
             <div class="receipt-dispenser__viewport">
               <div class="receipt-card" id="clinic-receipt" aria-live="polite">
-                <div class="receipt-card__top">
-                  <div class="receipt-card__brand">
-                    <span class="receipt-card__title">СТОМАТОЛОГИЯ «МАРШАЛЛ»</span>
-                    <span class="receipt-card__addr">г. Нефтеюганск, 13-й мкр, д. 34 · +7 (3463) 24-34-44</span>
-                  </div>
-                  <span class="receipt-card__badge" id="receipt-code">СМЕТА #00 · ОСМОТР</span>
+                <div class="receipt-card__header-center">
+                  <span class="receipt-card__kassa">ПРЕДВАРИТЕЛЬНЫЙ ЛИСТ РАСЧЁТА</span>
+                  <strong class="receipt-card__title">СТОМАТОЛОГИЯ «МАРШАЛЛ»</strong>
+                  <span class="receipt-card__addr">г. Нефтеюганск, 13-й мкр, д. 34 · тел. +7 (3463) 24-34-44</span>
                 </div>
 
-                <div class="receipt-card__divider"></div>
+                <div class="receipt-card__double-dash" aria-hidden="true"></div>
+
+                <div class="receipt-card__meta">
+                  <span>ДОКУМЕНТ: <strong id="receipt-code">СМЕТА #00 · ОСМОТР</strong></span>
+                  <span>КАБИНЕТ: <strong>ДИАГНОСТИКА</strong></span>
+                </div>
+
+                <div class="receipt-card__double-dash" aria-hidden="true"></div>
 
                 <div class="receipt-card__subject">
-                  <span class="receipt-card__label">Выбранный повод обращения</span>
+                  <span class="receipt-card__label">ВЫБРАННОЕ НАПРАВЛЕНИЕ:</span>
                   <strong class="receipt-card__service-name" id="receipt-service-title">Бесплатная консультация — врач сам подскажет на осмотре</strong>
+                </div>
+
+                <div class="receipt-card__cols-head" aria-hidden="true">
+                  <span>НАИМЕНОВАНИЕ ЭТАПА</span>
+                  <span>СТОИМОСТЬ</span>
                 </div>
 
                 <ul class="receipt-card__lines" id="receipt-lines">
@@ -620,22 +630,27 @@
                   </li>
                 </ul>
 
-                <div class="receipt-card__divider receipt-card__divider--dashed"></div>
+                <div class="receipt-card__double-dash" aria-hidden="true"></div>
 
                 <div class="receipt-card__totals">
                   <div class="receipt-card__total-row receipt-card__total-row--free">
-                    <span>К оплате на первом визите (осмотр и план)</span>
+                    <span>ИТОГО ЗА ПЕРВИЧНЫЙ ОСМОТР И ПЛАН</span>
                     <strong>0 ₽</strong>
                   </div>
                   <div class="receipt-card__total-row">
-                    <span>Ориентир по выбранному лечению</span>
+                    <span>ОРИЕНТИР ПО ВЫБРАННОМУ ЛЕЧЕНИЮ</span>
                     <strong id="receipt-total-price">после осмотра врача</strong>
                   </div>
                 </div>
 
-                <div class="receipt-card__foot">
-                  <span>* Итоговая цена фиксируется в договоре до начала любых процедур.</span>
+                <div class="receipt-card__double-dash" aria-hidden="true"></div>
+
+                <div class="receipt-card__footer-block">
+                  <div class="receipt-card__stamp">ЦЕНА ФИКСИРУЕТСЯ В ДОГОВОРЕ ДО ЛЕЧЕНИЯ</div>
+                  <div class="receipt-card__barcode" aria-hidden="true"></div>
+                  <span class="receipt-card__code-sub">MRSH-86-NEFT-13MKR-34 · СПАСИБО ЗА ДОВЕРИЕ</span>
                 </div>
+
                 <div class="receipt-card__sawtooth" aria-hidden="true"></div>
               </div>
             </div>
@@ -734,11 +749,8 @@
           <div class="map-widget map-widget--dark">
             <div class="map-widget__header">
               <div class="map-widget__brand">
-                <img class="map-widget__logo" src="assets/logo-map.png" alt="Эмблема клиники Маршалл" width="38" height="38">
-                <div class="map-widget__title-wrap">
-                  <strong class="map-widget__title">Мы на карте</strong>
-                  <span class="map-widget__subtitle">Стоматология «Маршалл»</span>
-                </div>
+                <img class="map-widget__logo" src="assets/logo-map.png" alt="Эмблема клиники Маршалл" width="40" height="40">
+                <strong class="map-widget__title">Мы на карте</strong>
               </div>
               <span class="map-widget__pin-badge">
                 <span class="pulse-dot"></span>
@@ -762,10 +774,6 @@
         <div class="finale-giant">
           <div class="finale-giant__wordmark" aria-hidden="true">
             Marshall<span class="reg-mark">®</span>
-          </div>
-          <div class="finale-giant__card">
-            <img src="assets/arc-orthodontics.webp" alt="Эстетическая стоматология Маршалл" width="280" height="180" loading="lazy">
-            <span>Стоматологический центр · Нефтеюганск, 13 мкр, 34</span>
           </div>
         </div>
 

@@ -233,7 +233,7 @@
       });
     }
 
-    // Strictly vertical, slower stepped thermal receipt printer feed-out animation (no side-to-side wobble)
+    // Strictly vertical, frequent small-step thermal receipt printer feed-out animation (no side-to-side wobble)
     playReceiptPrintIn = () => {
       if (!receiptCard || typeof window.gsap === "undefined" || prefersReducedMotion) {
         if (receiptCard) receiptCard.style.transform = "none";
@@ -243,63 +243,41 @@
       gsap.killTweensOf(receiptCard);
       gsap.set(receiptCard, { yPercent: -104, x: 0, rotation: 0, opacity: 1 });
 
+      const feedSteps = [-94, -85, -76, -67, -58, -49, -40, -31, -22, -14, -6, 0];
       const tl = gsap.timeline();
-      tl.to(receiptCard, {
-        yPercent: -80,
-        duration: 0.16,
-        ease: "power2.out"
-      })
-        .to(receiptCard, { yPercent: -80, duration: 0.09 })
-        .to(receiptCard, {
-          yPercent: -55,
-          duration: 0.16,
-          ease: "power2.out"
-        })
-        .to(receiptCard, { yPercent: -55, duration: 0.09 })
-        .to(receiptCard, {
-          yPercent: -30,
-          duration: 0.16,
-          ease: "power2.out"
-        })
-        .to(receiptCard, { yPercent: -30, duration: 0.09 })
-        .to(receiptCard, {
-          yPercent: -11,
-          duration: 0.15,
-          ease: "power2.out"
-        })
-        .to(receiptCard, { yPercent: -11, duration: 0.08 })
-        .to(receiptCard, {
-          yPercent: 0,
-          duration: 0.22,
-          ease: "power3.out"
+      feedSteps.forEach((targetY, idx) => {
+        const isLast = idx === feedSteps.length - 1;
+        tl.to(receiptCard, {
+          yPercent: targetY,
+          duration: isLast ? 0.12 : 0.065,
+          ease: isLast ? "power3.out" : "power2.out"
         });
+        if (!isLast) {
+          tl.to(receiptCard, { yPercent: targetY, duration: 0.042 });
+        }
+      });
     };
 
-    // Reverse strictly vertical stepped retraction when leaving #booking
+    // Reverse strictly vertical frequent small-step retraction when leaving #booking
     playReceiptRetractOut = () => {
       if (!receiptCard || typeof window.gsap === "undefined" || prefersReducedMotion) {
         return;
       }
       const gsap = window.gsap;
       gsap.killTweensOf(receiptCard);
+      const retractSteps = [-15, -30, -45, -60, -75, -90, -104];
       const tl = gsap.timeline();
-      tl.to(receiptCard, {
-        yPercent: -34,
-        duration: 0.12,
-        ease: "power2.in"
-      })
-        .to(receiptCard, { yPercent: -34, duration: 0.05 })
-        .to(receiptCard, {
-          yPercent: -70,
-          duration: 0.12,
-          ease: "power2.in"
-        })
-        .to(receiptCard, { yPercent: -70, duration: 0.05 })
-        .to(receiptCard, {
-          yPercent: -104,
-          duration: 0.14,
+      retractSteps.forEach((targetY, idx) => {
+        const isLast = idx === retractSteps.length - 1;
+        tl.to(receiptCard, {
+          yPercent: targetY,
+          duration: 0.055,
           ease: "power2.in"
         });
+        if (!isLast) {
+          tl.to(receiptCard, { yPercent: targetY, duration: 0.028 });
+        }
+      });
     };
 
     function switchReceiptWithPrintAnimation(serviceValue) {
