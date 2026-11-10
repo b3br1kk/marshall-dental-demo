@@ -902,10 +902,10 @@ button, input, select {
   width: min(410px, calc(100% - 48px));
   background: #FFFDF9;
   border: 1.5px solid var(--ink);
-  border-radius: 18px;
-  padding: 22px 22px 18px;
+  border-radius: 20px;
+  padding: 24px;
   z-index: 12;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1446,6 +1446,18 @@ button, input, select {
   font-weight: 600;
   color: #D5CBC0;
   margin-bottom: 7px;
+}
+
+.field__optional {
+  font-weight: 400;
+  color: #9E9489;
+}
+
+.field__hint {
+  display: block;
+  margin-top: 7px;
+  font-size: 12.5px;
+  color: #E59874;
 }
 
 .field input,
