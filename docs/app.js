@@ -366,48 +366,30 @@
         }
       });
 
-      // B. Vertical Sticky Stacking Service Cards (Velde 00:08–00:09)
-      // As card N+1 slides up over card N, card N subtly scales down and dims
-      const stackCards = gsap.utils.toArray(".stack-card");
-      stackCards.forEach((card, index) => {
-        if (index === stackCards.length - 1) return;
-        const nextCard = stackCards[index + 1];
-        gsap.to(card, {
-          scale: 0.96,
-          filter: "brightness(0.62)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: nextCard,
-            start: "top 85%",
-            end: "top 15%",
-            scrub: true
-          }
+      // B. Vertical Sticky Stacking Cards (Velde "What we offer" 00:08–00:09)
+      // Applied independently to both #services (#stack-cards) and #journey (#journey-stack-cards)
+      const stackContainers = gsap.utils.toArray(".stack-cards");
+      stackContainers.forEach((container) => {
+        const cards = Array.from(container.querySelectorAll(".stack-card"));
+        cards.forEach((card, index) => {
+          if (index === cards.length - 1) return;
+          const nextCard = cards[index + 1];
+          gsap.to(card, {
+            scale: 0.96,
+            filter: "brightness(0.62)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: nextCard,
+              start: "top 85%",
+              end: "top 15%",
+              scrub: true
+            }
+          });
         });
-      });
-
-      // C. Scroll-Pinned 50/50 Patient Journey (#journey)
-      // Automatically switches left photo (01..04) & right step (01..04) on scroll
-      const journeyStepsCount = 4;
-      ScrollTrigger.create({
-        trigger: "#journey",
-        start: "top 12%",
-        end: "+=175%",
-        pin: true,
-        scrub: 0.25,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          const stepIdx = Math.min(
-            journeyStepsCount - 1,
-            Math.floor(self.progress * journeyStepsCount)
-          );
-          if (setActiveJourneyStep) {
-            setActiveJourneyStep(stepIdx);
-          }
-        }
       });
     });
 
-    // 5.4 Section Stagger Reveals (Swiss Metrics, Praise Cards, Studio Strip)
+    // 5.4 Section Stagger Reveals (Swiss Metrics, Praise Cards)
     gsap.from(".swiss-metric", {
       y: 24,
       opacity: 0,
@@ -428,18 +410,6 @@
       ease: "power3.out",
       scrollTrigger: {
         trigger: ".praise-grid",
-        start: "top 85%"
-      }
-    });
-
-    gsap.from(".studio-strip__item", {
-      y: 24,
-      opacity: 0,
-      duration: 0.65,
-      stagger: 0.08,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".studio-strip",
         start: "top 85%"
       }
     });

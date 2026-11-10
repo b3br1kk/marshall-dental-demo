@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="assets/logo-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -177,7 +177,7 @@
           </div>
           <div class="swiss-grid__statement">
             <h2 class="manifesto-heading" id="about-title">
-              Всё в одной клинике рядом с домом — без беготни по городу за снимками и без скрытых доплат в процессе лечения.
+              Всё в одной клинике рядом с домом — <span class="title-accent">без беготни по городу</span> за снимками и без скрытых доплат в процессе лечения.
             </h2>
             <p class="manifesto-sub">
               Мы находимся в 13-м микрорайоне (дом 34). На первом бесплатном приёме врач спокойно осмотрит зубы, при необходимости сразу на месте сделает 3D-снимок и простыми словами объяснит варианты решения.
@@ -247,7 +247,7 @@
         <div class="stack-header">
           <div>
             <span class="section-kicker section-kicker--light">УСЛУГИ И ПРОЗРАЧНЫЕ ЦЕНЫ</span>
-            <h2 class="stack-header__title" id="services-title">Четыре основных направления клиники</h2>
+            <h2 class="stack-header__title" id="services-title">Четыре основных <span class="title-accent">направления клиники</span></h2>
           </div>
           <p class="stack-header__hint">
             Вам не обязательно заранее знать название услуги. Можно выбрать подходящий вариант ниже или сразу записаться на <strong>бесплатную консультацию (0 ₽)</strong> — врач сам всё подскажет на осмотре.
@@ -374,92 +374,122 @@
       </div>
     </section>
 
-    <!-- 5. SCROLL-DRIVEN 50/50 SPLIT: HOW THE VISIT WORKS -->
-    <section class="journey-section" id="journey" aria-labelledby="journey-title">
-      <div class="container journey__grid">
-        <div class="journey__media-col">
-          <div class="journey__sticky-frame">
-            <img class="journey-img is-active" data-step-img="0" src="assets/journey-01-consult.webp" alt="Врач показывает снимок зубов и объясняет план лечения" width="1200" height="900" loading="lazy">
-            <img class="journey-img" data-step-img="1" src="assets/journey-02-surgery.webp" alt="Современное оборудование в кабинете стоматологии Маршалл" width="1200" height="900" loading="lazy">
-            <img class="journey-img" data-step-img="2" src="assets/journey-03-ceramist.webp" alt="Точный подбор естественного цвета будущей коронки" width="1200" height="900" loading="lazy">
-            <img class="journey-img" data-step-img="3" src="assets/journey-04-mirror.webp" alt="Пациентка с зеркалом оценивает красивую улыбку после приёма" width="1200" height="900" loading="lazy">
+    <!-- 5. HOW THE VISIT WORKS — REBUILT IN VELDE "WHAT WE OFFER" STICKY STACK ARCHITECTURE (Velde 00:08–00:09) -->
+    <section class="stack-section stack-section--journey" id="journey" aria-labelledby="journey-title">
+      <div class="container">
+        <div class="stack-header">
+          <div>
+            <span class="section-kicker section-kicker--light">КАК ПРОХОДИТ ПРИЁМ · 4 ШАГА</span>
+            <h2 class="stack-header__title" id="journey-title">Не знаете, с чего начать? <span class="title-accent">Достаточно просто прийти</span></h2>
           </div>
+          <p class="stack-header__hint">
+            Спокойный и понятный маршрут от первого бесплатного осмотра (<strong>0 ₽</strong>) до готовой улыбки — вы всегда заранее знаете следующий шаг и точную стоимость.
+          </p>
         </div>
 
-        <div class="journey__steps-col">
-          <span class="section-kicker">КАК ПРОХОДИТ ПРИЁМ · 4 ШАГА</span>
-          <h2 class="section-title" id="journey-title">Не знаете, с чего начать? <span class="title-accent">Достаточно просто прийти</span></h2>
-
-          <div class="journey-accordion" id="journey-accordion">
-            <article class="j-step is-open" data-jstep="0">
-              <span class="j-step__rail" aria-hidden="true"><span class="j-step__fill"></span></span>
-              <button type="button" class="j-step__trigger" aria-expanded="true">
-                <span class="j-step__num">01</span>
-                <span class="j-step__heading">Бесплатная консультация и осмотр (20–30 минут)</span>
-              </button>
-              <div class="j-step__body">
-                <p>Вы просто приходите в удобное время. Врач бережно осмотрит зубы, выслушает вас и понятным языком расскажет, что нужно сделать в первую очередь.</p>
-                <div class="j-step__tags">
-                  <span>Стоимость — 0 ₽</span>
-                  <span>Ни к чему не обязывает</span>
-                  <span>Спокойная беседа</span>
-                </div>
+        <div class="stack-cards" id="journey-stack-cards">
+          <!-- STEP 01 -->
+          <article class="stack-card stack-card--step" data-jstack="0">
+            <div class="stack-card__content">
+              <div class="stack-card__top">
+                <span class="stack-card__num">01</span>
+                <span class="stack-card__price-pill">Шаг 1 · Стоимость 0 ₽</span>
               </div>
-            </article>
-
-            <article class="j-step" data-jstep="1">
-              <span class="j-step__rail" aria-hidden="true"><span class="j-step__fill"></span></span>
-              <button type="button" class="j-step__trigger" aria-expanded="false">
-                <span class="j-step__num">02</span>
-                <span class="j-step__heading">Снимок на месте и точная цена до начала работы</span>
-              </button>
-              <div class="j-step__body">
-                <p>Если нужно заглянуть глубже, сразу в клинике делаем 3D-снимок. Вы заранее узнаёте итоговую сумму и сроки — никаких сюрпризов в процессе.</p>
-                <div class="j-step__tags">
-                  <span>Свой 3D-аппарат</span>
-                  <span>Понятная смета</span>
-                  <span>План на руки</span>
-                </div>
+              <h3 class="stack-card__title">Бесплатная консультация и осмотр (20–30 минут)</h3>
+              <p class="stack-card__desc">
+                Вы просто приходите в удобное время. Врач бережно осмотрит зубы, выслушает вас и понятным языком расскажет, что нужно сделать в первую очередь.
+              </p>
+              <ul class="stack-card__list">
+                <li><span>+</span> Первичный осмотр и беседа с врачом — бесплатно (0 ₽)</li>
+                <li><span>+</span> Не нужно заранее знать диагноз или название услуги</li>
+                <li><span>+</span> Спокойная атмосфера без спешки и навязывания</li>
+                <li><span>+</span> Ответы на все вопросы простыми словами</li>
+              </ul>
+              <div class="stack-card__actions">
+                <a class="btn btn--accent" href="#booking">
+                  <span>Записаться на бесплатный осмотр</span>
+                  <span aria-hidden="true">→</span>
+                </a>
               </div>
-            </article>
+            </div>
+            <div class="stack-card__media">
+              <img src="assets/journey-01-consult.webp" alt="Врач показывает снимок зубов и объясняет план лечения" width="800" height="600" loading="lazy">
+            </div>
+          </article>
 
-            <article class="j-step" data-jstep="2">
-              <span class="j-step__rail" aria-hidden="true"><span class="j-step__fill"></span></span>
-              <button type="button" class="j-step__trigger" aria-expanded="false">
-                <span class="j-step__num">03</span>
-                <span class="j-step__heading">Бережное лечение с комфортной анестезией</span>
-              </button>
-              <div class="j-step__body">
-                <p>Подбираем мягкое обезболивание и проводим все процедуры аккуратно и без спешки, а цвет новых коронок или пломб точно подстраиваем под ваши зубы.</p>
-                <div class="j-step__tags">
-                  <span>Без боли и страха</span>
-                  <span>Естественный цвет</span>
-                  <span>Аккуратная работа</span>
-                </div>
+          <!-- STEP 02 -->
+          <article class="stack-card stack-card--step" data-jstack="1">
+            <div class="stack-card__content">
+              <div class="stack-card__top">
+                <span class="stack-card__num">02</span>
+                <span class="stack-card__price-pill">Шаг 2 · Свой 3D-аппарат</span>
               </div>
-            </article>
+              <h3 class="stack-card__title">Снимок на месте и точная цена до начала работы</h3>
+              <p class="stack-card__desc">
+                Если нужно заглянуть глубже, сразу в клинике делаем трёхмерный снимок. Вы заранее узнаёте итоговую сумму и сроки — никаких сюрпризов в процессе.
+              </p>
+              <ul class="stack-card__list">
+                <li><span>+</span> Компьютерный 3D-томограф прямо в клинике (за 5 минут)</li>
+                <li><span>+</span> Не нужно ездить за рентгеном в другие части города</li>
+                <li><span>+</span> Понятный пошаговый план лечения на руки</li>
+                <li><span>+</span> Честная фиксированная смета до старта процедур</li>
+              </ul>
+            </div>
+            <div class="stack-card__media">
+              <img src="assets/journey-02-surgery.webp" alt="Современное оборудование в кабинете стоматологии Маршалл" width="800" height="600" loading="lazy">
+            </div>
+          </article>
 
-            <article class="j-step" data-jstep="3">
-              <span class="j-step__rail" aria-hidden="true"><span class="j-step__fill"></span></span>
-              <button type="button" class="j-step__trigger" aria-expanded="false">
-                <span class="j-step__num">04</span>
-                <span class="j-step__heading">Готовая улыбка и забота после приёма</span>
-              </button>
-              <div class="j-step__body">
-                <p>Проверяем, чтобы новым зубам было максимально удобно, даём простые рекомендации по уходу и остаёмся на связи после лечения.</p>
-                <div class="j-step__tags">
-                  <span>Гарантия на работу</span>
-                  <span>Плановый осмотр</span>
-                  <span>Поддержка врача</span>
-                </div>
+          <!-- STEP 03 -->
+          <article class="stack-card stack-card--step" data-jstack="2">
+            <div class="stack-card__content">
+              <div class="stack-card__top">
+                <span class="stack-card__num">03</span>
+                <span class="stack-card__price-pill">Шаг 3 · Без боли и страха</span>
               </div>
-            </article>
-          </div>
+              <h3 class="stack-card__title">Бережное лечение с комфортной анестезией</h3>
+              <p class="stack-card__desc">
+                Подбираем мягкое обезболивание и проводим все процедуры аккуратно и без спешки, а цвет новых коронок или пломб точно подстраиваем под ваши зубы.
+              </p>
+              <ul class="stack-card__list">
+                <li><span>+</span> Современная мягкая анестезия с проверкой действия</li>
+                <li><span>+</span> Точный подбор естественного оттенка и формы зуба</li>
+                <li><span>+</span> Работа под оптическим увеличением</li>
+                <li><span>+</span> Удобное время приёма (в том числе вечером до 20:00)</li>
+              </ul>
+            </div>
+            <div class="stack-card__media">
+              <img src="assets/journey-03-ceramist.webp" alt="Точный подбор естественного цвета будущей коронки" width="800" height="600" loading="lazy">
+            </div>
+          </article>
+
+          <!-- STEP 04 -->
+          <article class="stack-card stack-card--step" data-jstack="3">
+            <div class="stack-card__content">
+              <div class="stack-card__top">
+                <span class="stack-card__num">04</span>
+                <span class="stack-card__price-pill">Шаг 4 · Гарантия на работу</span>
+              </div>
+              <h3 class="stack-card__title">Готовая улыбка и забота после приёма</h3>
+              <p class="stack-card__desc">
+                Проверяем, чтобы новым зубам было максимально удобно с первого дня, даём простые рекомендации по уходу и остаёмся на связи после лечения.
+              </p>
+              <ul class="stack-card__list">
+                <li><span>+</span> Официальная гарантия клиники по договору</li>
+                <li><span>+</span> Бесплатный контрольный осмотр после заживления</li>
+                <li><span>+</span> Простые и понятные рекомендации по уходу дома</li>
+                <li><span>+</span> Бережное сопровождение лечащего врача</li>
+              </ul>
+            </div>
+            <div class="stack-card__media">
+              <img src="assets/journey-04-mirror.webp" alt="Пациентка с зеркалом оценивает красивую улыбку после приёма" width="800" height="600" loading="lazy">
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- 6. ANONYMOUS "WHAT PATIENTS PRAISE US FOR" 4-COLUMN GRID + GALLERY STRIP (Velde 00:11–00:12) -->
+    <!-- 6. ANONYMOUS "WHAT PATIENTS PRAISE US FOR" 4-COLUMN GRID (Velde 00:11) -->
     <section class="praise-section" id="praise" aria-labelledby="praise-title">
       <div class="container">
         <div class="praise-header">
@@ -516,26 +546,6 @@
             <div class="praise-card__foot">
               <span class="praise-card__tag">Комфорт и экономия времени</span>
             </div>
-          </article>
-        </div>
-
-        <!-- 4-Photo Studio Strip (Velde 00:12) -->
-        <div class="studio-strip">
-          <article class="studio-strip__item js-pick-service" data-service="Имплантация (восстановление зуба)">
-            <span class="studio-strip__tag">01 · Имплантация</span>
-            <img src="assets/arc-01-implant.webp" alt="Системы дентальной имплантации" width="500" height="500" loading="lazy">
-          </article>
-          <article class="studio-strip__item js-pick-service" data-service="Коронки и эстетика улыбки">
-            <span class="studio-strip__tag">02 · Коронки и виниры</span>
-            <img src="assets/arc-prosthetics.webp" alt="Керамические реставрации и коронки" width="500" height="500" loading="lazy">
-          </article>
-          <article class="studio-strip__item js-pick-service" data-service="3D-снимок зубов и диагностика">
-            <span class="studio-strip__tag">03 · 3D-томография</span>
-            <img src="assets/arc-03-cbct.webp" alt="Аппарат 3D-томографии в клинике" width="500" height="500" loading="lazy">
-          </article>
-          <article class="studio-strip__item js-pick-service" data-service="Бережное удаление зуба (в т.ч. зуба мудрости)">
-            <span class="studio-strip__tag">04 · Хирургия без боли</span>
-            <img src="assets/arc-04-surgeon.webp" alt="Оптика и точная хирургия" width="500" height="500" loading="lazy">
           </article>
         </div>
       </div>
@@ -616,7 +626,7 @@
         <div class="finale-top">
           <div class="finale-top__left">
             <span class="section-kicker section-kicker--light">ЗАПИСЬ НА ПРИЁМ · ПЕРВЫЙ ОСМОТР 0 ₽</span>
-            <h2 class="finale-top__title" id="booking-title">Начнём с бесплатного осмотра и спокойной беседы.</h2>
+            <h2 class="finale-top__title" id="booking-title">Начнём с <span class="title-accent">бесплатного осмотра</span> и спокойной беседы.</h2>
             <p class="finale-top__lead">
               Необязательно заранее знать название услуги. Оставьте телефон — администратор перезвонит, ответит на вопросы и подберёт удобное время.
             </p>

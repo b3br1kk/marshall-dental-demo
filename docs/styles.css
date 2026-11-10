@@ -18,6 +18,7 @@
   --glass: rgba(250, 249, 246, 0.88);
 
   --font-sans: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-accent: "Playfair Display", Georgia, serif;
 
   --r-xl: 24px;
   --r-lg: 18px;
@@ -549,7 +550,16 @@ button, input, select {
 }
 
 .title-accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.015em;
   color: var(--accent);
+}
+
+.stack-header__title .title-accent,
+.finale-top__title .title-accent {
+  color: #E8926E;
 }
 
 .pulse-dot {
@@ -966,9 +976,16 @@ button, input, select {
   will-change: transform, filter;
 }
 
-.stack-card[data-stack="1"] { top: 106px; }
-.stack-card[data-stack="2"] { top: 124px; }
-.stack-card[data-stack="3"] { top: 142px; }
+.stack-section--journey {
+  border-top: 1px solid var(--hairline-dark);
+}
+
+.stack-card[data-stack="1"],
+.stack-card[data-jstack="1"] { top: 106px; }
+.stack-card[data-stack="2"],
+.stack-card[data-jstack="2"] { top: 124px; }
+.stack-card[data-stack="3"],
+.stack-card[data-jstack="3"] { top: 142px; }
 
 .stack-card__top {
   display: flex;
