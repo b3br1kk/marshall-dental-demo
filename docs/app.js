@@ -1,9 +1,11 @@
 /* ============================================================
-   MARSHALL® Dental Studio — Choreography & Simple Patient UX
+   MARSHALL Dental Studio — Production Choreography & UX
    ============================================================ */
 
 (function () {
   "use strict";
+
+  let lenisInstance = null;
 
   // 1. CLINIC ADVANTAGES DATA (Section 2)
   const SUITE_STATES = [
@@ -35,7 +37,6 @@
       visits: "Консультация — 0 ₽",
       title: "Имплантация отсутствующего зуба",
       desc: "Надёжный новый зуб, который выглядит и ощущается как свой собственный. Соседние здоровые зубы обтачивать не нужно.",
-      callout: "Первичный осмотр и план лечения у имплантолога — бесплатно",
       total: "от 38 000 ₽",
       subnote: "Точную стоимость врач назовёт на бесплатной консультации после осмотра",
       serviceValue: "Имплантация (восстановление зуба)",
@@ -52,7 +53,6 @@
       visits: "Консультация — 0 ₽",
       title: "Коронки и восстановление зубов",
       desc: "Прочные коронки из циркония и керамики. Точно подбираем цвет под ваши родные зубы, чтобы улыбка выглядела естественно.",
-      callout: "Естественный цвет и форма под ваши зубы",
       total: "от 26 000 ₽",
       subnote: "Врач бесплатно осмотрит зуб и подскажет подходящий вариант",
       serviceValue: "Коронки и эстетика улыбки",
@@ -69,7 +69,6 @@
       visits: "Консультация — 0 ₽",
       title: "Бережное удаление зуба и 3D-снимок",
       desc: "Аккуратно и безболезненно удаляем разрушенные зубы и сложные зубы мудрости под контролем снимка.",
-      callout: "Мягкая анестезия и бесплатный контрольный осмотр",
       total: "от 8 500 ₽",
       subnote: "Осмотр и проверка после заживления входят в стоимость",
       serviceValue: "Бережное удаление зуба (в т.ч. зуба мудрости)",
@@ -86,7 +85,6 @@
       visits: "Консультация — 0 ₽",
       title: "Выравнивание зубов капами и брекетами",
       desc: "Плавное выравнивание зубов прозрачными съёмными капами (элайнерами) или современными аккуратными брекетами.",
-      callout: "Покажем будущий результат ещё до начала лечения",
       total: "от 42 000 ₽",
       subnote: "На бесплатном приёме врач подскажет сроки и удобный вариант",
       serviceValue: "Выравнивание зубов (капы и брекеты)",
@@ -99,12 +97,115 @@
     }
   ];
 
-  const JOURNEY_CAPTIONS = [
-    "Шаг 1 · Бесплатный осмотр врача (0 ₽)",
-    "Шаг 2 · Снимок на месте и понятная цена",
-    "Шаг 3 · Бережное лечение без боли",
-    "Шаг 4 · Красивая и здоровая улыбка"
-  ];
+  // ============================================================
+  // SMOOTH ANCHOR SCROLL HELPER (FOR HEADER & ALL CTA BUTTONS)
+  // ============================================================
+  function smoothScrollToTarget(selector) {
+    if (!selector || selector === "#") return;
+    if (selector === "#top") {
+      if (lenisInstance) {
+        lenisInstance.scrollTo(0, {
+          duration: 1.15,
+          easing: (t) => 1 - Math.pow(1 - t, 4)
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return;
+    }
+
+    const targetEl = document.querySelector(selector);
+    if (!targetEl) return;
+
+    const headerOffset = -88;
+    if (lenisInstance) {
+      lenisInstance.scrollTo(targetEl, {
+        offset: headerOffset,
+        duration: 1.15,
+        easing: (t) => 1 - Math.pow(1 - t, 4)
+      });
+    } else {
+      const rect = targetEl.getBoundingClientRect();
+      const targetY = window.pageYOffset + rect.top + headerOffset;
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+    }
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      const href = anchor.getAttribute("href");
+      if (!href || href.length < 2) return;
+      e.preventDefault();
+      smoothScrollToTarget(href);
+    });
+  });
+
+  // ============================================================
+  // ANIMATED HEADER NAV INDICATOR PILL & SCROLL SPY
+  // ============================================================
+  const navEl = document.getElementById("main-nav");
+  const navIndicator = document.getElementById("nav-indicator");
+  const navLinks = Array.from(document.querySelectorAll(".nav__link"));
+
+  function moveNavIndicator(linkEl) {
+    if (!navEl || !navIndicator || !linkEl) return;
+    const navRect = navEl.getBoundingClientRect();
+    const linkRect = linkEl.getBoundingClientRect();
+    if (linkRect.width === 0) return;
+    const offsetX = linkRect.left - navRect.left;
+    navIndicator.style.width = `${linkRect.width}px`;
+    navIndicator.style.transform = `translate3d(${offsetX}px, 0, 0)`;
+    navIndicator.style.opacity = "1";
+  }
+
+  function syncNavIndicatorToActive() {
+    const activeLink = document.querySelector(".nav__link.is-active") || navLinks[0];
+    if (activeLink) moveNavIndicator(activeLink);
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener("mouseenter", () => moveNavIndicator(link));
+    link.addEventListener("focus", () => moveNavIndicator(link));
+    link.addEventListener("click", () => {
+      navLinks.forEach((l) => l.classList.remove("is-active"));
+      link.classList.add("is-active");
+      moveNavIndicator(link);
+    });
+  });
+
+  if (navEl) {
+    navEl.addEventListener("mouseleave", syncNavIndicatorToActive);
+  }
+  window.addEventListener("resize", syncNavIndicatorToActive);
+  window.addEventListener("load", () => setTimeout(syncNavIndicatorToActive, 120));
+  setTimeout(syncNavIndicatorToActive, 80);
+
+  // Scroll Spy for Active Section in Header
+  const trackedSections = ["#suite", "#podium", "#journey", "#departments", "#contacts"]
+    .map((sel) => ({ sel, el: document.querySelector(sel) }))
+    .filter((item) => item.el);
+
+  function updateActiveNavOnScroll() {
+    const scrollMid = window.scrollY + window.innerHeight * 0.34;
+    let currentSel = trackedSections[0]?.sel;
+    for (const item of trackedSections) {
+      const top = item.el.offsetTop;
+      if (scrollMid >= top) {
+        currentSel = item.sel;
+      }
+    }
+    if (currentSel) {
+      navLinks.forEach((link) => {
+        const isMatch = link.getAttribute("href") === currentSel;
+        link.classList.toggle("is-active", isMatch);
+      });
+      if (!navEl || !navEl.matches(":hover")) {
+        syncNavIndicatorToActive();
+      }
+    }
+  }
+
+  window.addEventListener("scroll", updateActiveNavOnScroll, { passive: true });
 
   // ============================================================
   // HELPER: SELECT SERVICE IN BOOKING FORM
@@ -169,7 +270,6 @@
   const stageWatermark = document.getElementById("stage-watermark");
   const stageResetBtn = document.getElementById("stage-reset");
   const receiptCloseBtn = document.getElementById("receipt-close");
-  const calloutText = document.getElementById("callout-text");
 
   const rcCode = document.getElementById("rc-code");
   const rcVisits = document.getElementById("rc-visits");
@@ -190,7 +290,6 @@
     studioStage.classList.add("has-active");
     if (stageResetBtn) stageResetBtn.hidden = false;
     if (stageWatermark) stageWatermark.textContent = item.watermark;
-    if (calloutText) calloutText.textContent = item.callout;
 
     podiumItems.forEach((el, i) => {
       el.classList.toggle("is-selected", i === index);
@@ -247,33 +346,36 @@
 
   if (rcApplyBtn) {
     rcApplyBtn.addEventListener("click", () => {
-      const bookingEl = document.getElementById("booking");
-      if (bookingEl) bookingEl.scrollIntoView({ behavior: "smooth" });
+      smoothScrollToTarget("#booking");
       const nameInput = document.getElementById("inp-name");
-      if (nameInput) setTimeout(() => nameInput.focus(), 600);
+      if (nameInput) setTimeout(() => nameInput.focus(), 700);
     });
   }
 
   // ============================================================
-  // STICKY 50/50 CARE JOURNEY ACCORDION (Section 4)
+  // SCROLL-DRIVEN 50/50 CARE JOURNEY (Section 4)
   // ============================================================
-  const jSteps = document.querySelectorAll(".j-step");
-  const jImages = document.querySelectorAll(".journey-img");
-  const jCaption = document.getElementById("journey-caption");
+  const jSteps = Array.from(document.querySelectorAll(".j-step"));
+  const jImages = Array.from(document.querySelectorAll(".journey-img"));
+  let currentJourneyStep = 0;
 
   function activateJourneyStep(index) {
+    const clamped = Math.max(0, Math.min(jSteps.length - 1, index));
+    if (clamped === currentJourneyStep && jSteps[clamped]?.classList.contains("is-open")) {
+      return;
+    }
+    currentJourneyStep = clamped;
+
     jSteps.forEach((step, i) => {
-      const open = i === index;
+      const open = i === clamped;
       step.classList.toggle("is-open", open);
       const btn = step.querySelector(".j-step__trigger");
       if (btn) btn.setAttribute("aria-expanded", String(open));
     });
+
     jImages.forEach((img, i) => {
-      img.classList.toggle("is-active", i === index);
+      img.classList.toggle("is-active", i === clamped);
     });
-    if (jCaption && JOURNEY_CAPTIONS[index]) {
-      jCaption.textContent = JOURNEY_CAPTIONS[index];
-    }
   }
 
   jSteps.forEach((step, idx) => {
@@ -293,8 +395,7 @@
       if (dept) {
         selectBookingService(dept);
       }
-      const bookingEl = document.getElementById("booking");
-      if (bookingEl) bookingEl.scrollIntoView({ behavior: "smooth" });
+      smoothScrollToTarget("#booking");
     });
   });
 
@@ -339,63 +440,63 @@
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       // 1. Lenis Smooth Inertial Scroll
       if (typeof Lenis !== "undefined") {
-        const lenis = new Lenis({
+        lenisInstance = new Lenis({
           duration: 1.12,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smoothWheel: true
         });
-        lenis.on("scroll", ScrollTrigger.update);
-        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        lenisInstance.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
         gsap.ticker.lagSmoothing(0);
       }
 
-      // 2. Preloader -> Hero Curtain & Scale Reveal (0.9s)
+      // 2. Preloader -> Hero Curtain & Scale Reveal
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       tl.fromTo(
         ".preloader__inner",
         { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.35 }
+        { opacity: 1, y: 0, duration: 0.32 }
       )
         .to(".preloader", {
           clipPath: "inset(0 0 100% 0)",
-          duration: 0.72,
+          duration: 0.68,
           ease: "power3.inOut",
-          delay: 0.12
+          delay: 0.1
         })
         .from(
           "#hero-media-wrap",
           {
-            scale: 1.07,
-            clipPath: "inset(6% 6% 6% 6% round 28px)",
-            duration: 0.88
+            scale: 1.06,
+            clipPath: "inset(5% 5% 5% 5% round 28px)",
+            duration: 0.85
           },
-          "-=0.55"
+          "-=0.52"
         )
         .from(
           ".line-inner",
           {
             yPercent: 108,
-            duration: 0.72,
+            duration: 0.7,
             stagger: 0.08
           },
-          "-=0.68"
+          "-=0.65"
         )
         .from(
           ".hero-anim",
           {
             opacity: 0,
             y: 16,
-            duration: 0.55,
+            duration: 0.52,
             stagger: 0.06
           },
-          "-=0.5"
+          "-=0.48"
         )
         .set(".preloader", { display: "none" });
     });
 
     // 3. Desktop Spatial Scroll Choreography
     mm.add("(min-width: 1081px) and (prefers-reduced-motion: no-preference)", () => {
-      // 3a. Expand Suite Card from 76vw to 96vw Full-Bleed on Scroll
+      // 3a. Expand Suite Card from 74vw to 96vw Full-Bleed on Scroll
       gsap.fromTo(
         "#expand-card",
         { width: "74vw", borderRadius: "32px" },
@@ -412,7 +513,22 @@
         }
       );
 
-      // 3b. 3D Curved Arc Card Fanning
+      // 3b. Scroll-Pinned 50/50 Journey ("Не знаете, с чего начать?"):
+      // Scrolling through #journey switches images 0 -> 1 -> 2 -> 3 and highlights steps on the right
+      ScrollTrigger.create({
+        trigger: "#journey",
+        start: "top 13%",
+        end: "+=170%",
+        pin: true,
+        scrub: 0.25,
+        onUpdate: (self) => {
+          const total = jSteps.length;
+          const idx = Math.min(total - 1, Math.floor(self.progress * total));
+          activateJourneyStep(idx);
+        }
+      });
+
+      // 3c. 3D Curved Arc Card Fanning
       const cards = gsap.utils.toArray(".arc-card");
       const fanAngles = [-10, -5, 0, 5, 10];
       const fanY = [38, 10, 0, 10, 38];
@@ -442,6 +558,20 @@
           }
         }
       );
+    });
+
+    // 4. Tablet/Mobile Scroll-Driven Journey (without full-screen pin)
+    mm.add("(max-width: 1080px)", () => {
+      ScrollTrigger.create({
+        trigger: "#journey",
+        start: "top 60%",
+        end: "bottom 40%",
+        onUpdate: (self) => {
+          const total = jSteps.length;
+          const idx = Math.min(total - 1, Math.floor(self.progress * total));
+          activateJourneyStep(idx);
+        }
+      });
     });
   } else {
     const pre = document.getElementById("preloader");

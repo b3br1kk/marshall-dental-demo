@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MARSHALL® — Стоматология в Нефтеюганске (13 мкр, 34) · Бесплатная консультация</title>
-  <meta name="description" content="Бережная стоматология в Нефтеюганске (13 мкр, д. 34). Бесплатная консультация врача, свой 3D-снимок на месте, имплантация, коронки и лечение без боли.">
+  <title>MARSHALL — Стоматология в Нефтеюганске (13 мкр, 34) · Бесплатная консультация</title>
+  <meta name="description" content="Бережная стоматология «Маршалл» в Нефтеюганске (13 мкр, д. 34). Бесплатная консультация врача, свой 3D-снимок на месте, имплантация, коронки и лечение без боли.">
   <meta name="theme-color" content="#FAF6F0">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23181512'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='19' fill='%23FAF6F0'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="assets/logo-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,30 +17,63 @@
   <!-- PRELOADER REVEAL -->
   <div class="preloader" id="preloader" aria-hidden="true">
     <div class="preloader__inner">
-      <span class="preloader__dot"></span>
-      <span class="preloader__brand">Marshall<sup>®</sup></span>
+      <span class="preloader__logo-box"></span>
+      <span class="preloader__brand">MARSHALL</span>
+    </div>
+  </div>
+
+  <!-- TOP DEMO CONCEPT BANNER -->
+  <div class="demo-banner demo-banner--top" role="note" aria-label="Уведомление о демо-концепте">
+    <div class="container demo-banner__inner">
+      <span class="demo-banner__badge">ДЕМО-КОНЦЕПТ</span>
+      <span class="demo-banner__text">Демонстрационный концепт официального сайта для стоматологии «Маршалл» (г. Нефтеюганск, 13 мкр, д. 34)</span>
     </div>
   </div>
 
   <!-- FLOATING STUDIO NAVBAR -->
   <header class="topbar" id="topbar">
     <div class="container topbar__inner">
-      <a class="brand" href="#top" aria-label="Стоматология Маршалл — На главную">
-        <span class="brand__mark" aria-hidden="true">M</span>
-        <span class="brand__name">Marshall<sup>®</sup><small>13 мкр, д. 34</small></span>
+      <a class="brand" href="#top" data-scroll-to="#top" aria-label="Стоматология Маршалл — На главную">
+        <span class="brand__logo-wrap">
+          <img class="brand__logo-img" src="assets/logo-mark.png" alt="Логотип стоматологии Маршалл" width="44" height="44">
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">MARSHALL</span>
+          <span class="brand__sub">Стоматология · 13 мкр, 34</span>
+        </span>
       </a>
 
-      <nav class="nav" aria-label="Основная навигация">
-        <a href="#suite">О клинике</a>
-        <a href="#podium">Услуги и цены</a>
-        <a href="#journey">Как проходит приём</a>
-        <a href="#departments">С чем обратиться</a>
-        <a href="#booking">Контакты</a>
+      <nav class="nav" id="main-nav" aria-label="Основная навигация">
+        <span class="nav__indicator" id="nav-indicator" aria-hidden="true"></span>
+        <a class="nav__link is-active" href="#suite" data-scroll-to="#suite">
+          <span class="nav__roll" data-label="О клинике"><span>О клинике</span></span>
+        </a>
+        <a class="nav__link" href="#podium" data-scroll-to="#podium">
+          <span class="nav__roll" data-label="Услуги и цены"><span>Услуги и цены</span></span>
+        </a>
+        <a class="nav__link" href="#journey" data-scroll-to="#journey">
+          <span class="nav__roll" data-label="Как проходит приём"><span>Как проходит приём</span></span>
+        </a>
+        <a class="nav__link" href="#departments" data-scroll-to="#departments">
+          <span class="nav__roll" data-label="Направления"><span>Направления</span></span>
+        </a>
+        <a class="nav__link" href="#contacts" data-scroll-to="#contacts">
+          <span class="nav__roll" data-label="Контакты"><span>Контакты</span></span>
+        </a>
       </nav>
 
       <div class="topbar__actions">
-        <a class="topbar__phone" href="tel:+73463243444">+7 (3463) 24-34-44</a>
-        <a class="btn btn--accent btn--sm" href="#booking">Бесплатная консультация</a>
+        <a class="topbar__phone" href="tel:+73463243444" aria-label="Позвонить в клинику +7 (3463) 24-34-44">
+          <span class="topbar__phone-dot" aria-hidden="true"></span>
+          <svg class="topbar__phone-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>+7 (3463) 24-34-44</span>
+        </a>
+        <a class="btn btn--accent btn--sm btn--header" href="#booking" data-scroll-to="#booking">
+          <span>Бесплатная консультация</span>
+          <svg class="btn__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </header>
@@ -58,7 +91,7 @@
 
           <h1 class="hero__title" id="hero-title">
             <span class="line-mask"><span class="line-inner">Бережная стоматология</span></span>
-            <span class="line-mask"><span class="line-inner">и <em>честные цены</em></span></span>
+            <span class="line-mask"><span class="line-inner">и <span class="title-accent">честные цены</span></span></span>
           </h1>
 
           <p class="hero__lead hero-anim">
@@ -66,11 +99,13 @@
           </p>
 
           <div class="hero__actions hero-anim">
-            <a class="btn btn--accent" href="#booking">
+            <a class="btn btn--accent" href="#booking" data-scroll-to="#booking">
               <span>Записаться на бесплатный осмотр</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
-            <a class="btn btn--glass" href="#podium">Посмотреть услуги и цены</a>
+            <a class="btn btn--glass" href="#podium" data-scroll-to="#podium">
+              <span>Услуги и цены</span>
+            </a>
           </div>
 
           <dl class="hero__stats hero-anim">
@@ -98,27 +133,6 @@
               height="900"
               fetchpriority="high"
             >
-            <!-- Floating Glass Badge Top-Left -->
-            <div class="glass-pill glass-pill--tl">
-              <span class="pulse-dot"></span>
-              <span>Первичная консультация — 0 ₽</span>
-            </div>
-
-            <!-- Floating Card Bottom-Right -->
-            <div class="glass-widget">
-              <div class="glass-widget__top">
-                <img src="assets/case-02-crowns.webp" alt="Керамические коронки естественного оттенка" width="96" height="72">
-                <div class="glass-widget__meta">
-                  <span class="glass-widget__code">БЕЗ НАВЯЗЫВАНИЯ УСЛУГ</span>
-                  <strong>Понятный план лечения</strong>
-                  <p>Сначала бесплатный осмотр и точная цена — решение всегда за вами</p>
-                </div>
-              </div>
-              <a class="glass-widget__cta" href="#podium">
-                <span>Посмотреть ориентиры цен</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
           </div>
 
           <!-- Simple Service Strip under Hero -->
@@ -137,7 +151,7 @@
       <div class="container suite-intro">
         <div>
           <span class="section-kicker">КОМФОРТ И ЗАБОТА · 13 МКР, 34</span>
-          <h2 class="section-title" id="suite-heading">Всё в одной клинике — <em>без беготни по городу</em></h2>
+          <h2 class="section-title" id="suite-heading">Всё в одной клинике — <span class="title-accent">без беготни по городу</span></h2>
         </div>
         <p class="suite-intro__sub">
           Мы находимся рядом с домом в 13-м микрорайоне. Сделать снимок, вылечить зуб или поставить коронку можно в одном месте, в спокойной и тёплой обстановке.
@@ -168,12 +182,6 @@
             </button>
           </div>
 
-          <!-- Bottom-Left Pill -->
-          <div class="expand-card__telemetry" aria-hidden="true">
-            <span class="pulse-dot"></span>
-            <span>СТОМАТОЛОГИЯ «МАРШАЛЛ» · ПН–ПТ 08:00–20:00</span>
-          </div>
-
           <!-- Bottom-Right Glass Card -->
           <article class="expand-card__dialog" aria-live="polite">
             <span class="dialog-tag" id="suite-tag">01 / 03 · ДИАГНОСТИКА НА МЕСТЕ</span>
@@ -197,7 +205,7 @@
         <div class="podium-header">
           <div>
             <span class="section-kicker">УСЛУГИ И ПРОЗРАЧНЫЕ ЦЕНЫ</span>
-            <h2 class="section-title" id="podium-title">Примерные цены на <em>основные направления</em></h2>
+            <h2 class="section-title" id="podium-title">Примерные цены на <span class="title-accent">основные направления</span></h2>
           </div>
           <p class="podium-header__hint">
             Нажмите на карточку, чтобы посмотреть, что входит в стоимость. А если вы не знаете, какая именно услуга вам нужна — просто запишитесь на <strong>бесплатный осмотр</strong>.
@@ -254,12 +262,6 @@
               <span class="podium-item__label">Выравнивание зубов</span>
               <span class="podium-item__price">от 42 000 ₽</span>
             </button>
-          </div>
-
-          <!-- Floating Callout Pin when an item is selected -->
-          <div class="podium-callout" id="podium-callout" aria-hidden="true">
-            <span class="podium-callout__dot"></span>
-            <span class="podium-callout__text" id="callout-text">Бесплатный осмотр врача перед началом лечения</span>
           </div>
 
           <!-- Slide-Over Simple Price Card -->
@@ -323,29 +325,25 @@
       </div>
     </section>
 
-    <!-- 4. STICKY 50/50 SPLIT: HOW THE VISIT WORKS -->
+    <!-- 4. SCROLL-DRIVEN 50/50 SPLIT: HOW THE VISIT WORKS -->
     <section class="journey-section" id="journey" aria-labelledby="journey-title">
-      <div class="container journey__grid">
+      <div class="container journey__grid" id="journey-pin-wrap">
         <div class="journey__media-col">
           <div class="journey__sticky-frame">
             <img class="journey-img is-active" data-step-img="0" src="assets/journey-01-consult.webp" alt="Врач показывает снимок зубов и объясняет план лечения" width="1200" height="900" loading="lazy">
             <img class="journey-img" data-step-img="1" src="assets/journey-02-surgery.webp" alt="Современное оборудование в кабинете стоматологии Маршалл" width="1200" height="900" loading="lazy">
             <img class="journey-img" data-step-img="2" src="assets/journey-03-ceramist.webp" alt="Точный подбор естественного цвета будущей коронки" width="1200" height="900" loading="lazy">
             <img class="journey-img" data-step-img="3" src="assets/journey-04-mirror.webp" alt="Пациентка с зеркалом оценивает красивую улыбку после приёма" width="1200" height="900" loading="lazy">
-
-            <div class="journey__frame-badge">
-              <span class="pulse-dot"></span>
-              <span id="journey-caption">Шаг 1 · Бесплатный осмотр врача</span>
-            </div>
           </div>
         </div>
 
         <div class="journey__steps-col">
           <span class="section-kicker">ПРОСТО И ПОНЯТНО · 4 ШАГА</span>
-          <h2 class="section-title" id="journey-title">Не знаете, с чего начать? <em>Достаточно просто прийти</em></h2>
+          <h2 class="section-title" id="journey-title">Не знаете, с чего начать? <span class="title-accent">Достаточно просто прийти</span></h2>
 
           <div class="journey-accordion" id="journey-accordion">
             <article class="j-step is-open" data-jstep="0">
+              <span class="j-step__rail" aria-hidden="true"><span class="j-step__fill"></span></span>
               <button type="button" class="j-step__trigger" aria-expanded="true">
                 <span class="j-step__num">01</span>
                 <span class="j-step__heading">Бесплатная консультация и осмотр (20–30 минут)</span>
@@ -361,6 +359,7 @@
             </article>
 
             <article class="j-step" data-jstep="1">
+              <span class="j-step__rail" aria-hidden="true"><span class="j-step__fill"></span></span>
               <button type="button" class="j-step__trigger" aria-expanded="false">
                 <span class="j-step__num">02</span>
                 <span class="j-step__heading">Снимок на месте и точная цена до начала работы</span>
@@ -376,6 +375,7 @@
             </article>
 
             <article class="j-step" data-jstep="2">
+              <span class="j-step__rail" aria-hidden="true"><span class="j-step__fill"></span></span>
               <button type="button" class="j-step__trigger" aria-expanded="false">
                 <span class="j-step__num">03</span>
                 <span class="j-step__heading">Бережное лечение с комфортной анестезией</span>
@@ -391,6 +391,7 @@
             </article>
 
             <article class="j-step" data-jstep="3">
+              <span class="j-step__rail" aria-hidden="true"><span class="j-step__fill"></span></span>
               <button type="button" class="j-step__trigger" aria-expanded="false">
                 <span class="j-step__num">04</span>
                 <span class="j-step__heading">Готовая улыбка и забота после приёма</span>
@@ -414,7 +415,7 @@
       <div class="container">
         <div class="arc-header">
           <span class="section-kicker">НАПРАВЛЕНИЯ КЛИНИКИ · МАРШАЛЛ</span>
-          <h2 class="section-title" id="arc-title">С чем к нам приходят <em>чаще всего</em></h2>
+          <h2 class="section-title" id="arc-title">С чем к нам приходят <span class="title-accent">чаще всего</span></h2>
           <p class="arc-header__sub">Нажмите на подходящую карточку, если хотите записаться по конкретному вопросу — или просто приходите на бесплатный осмотр.</p>
         </div>
 
@@ -488,23 +489,23 @@
         <div class="booking-vault">
           <div class="booking-vault__info">
             <span class="section-kicker section-kicker--light">ЗАПИСЬ НА ПРИЁМ · ПЕРВЫЙ ОСМОТР 0 ₽</span>
-            <h2 class="booking-vault__title" id="booking-title">Запишитесь на <em>бесплатную консультацию</em></h2>
+            <h2 class="booking-vault__title" id="booking-title">Запишитесь на <span class="title-accent title-accent--light">бесплатную консультацию</span></h2>
             <p class="booking-vault__lead">
               Необязательно заранее знать название услуги. Оставьте телефон — администратор перезвонит, ответит на вопросы и подберёт удобное время.
             </p>
 
             <dl class="clinic-details">
               <div>
-                <dt>Адрес клиники</dt>
-                <dd>г. Нефтеюганск, 13-й микрорайон, дом 34 (Стоматология «Маршалл»)</dd>
+                <dt>Первичный приём</dt>
+                <dd>Осмотр врача и составление плана лечения — 0 ₽</dd>
               </div>
               <div>
-                <dt>Телефон для записи</dt>
+                <dt>Прямой телефон для записи</dt>
                 <dd><a href="tel:+73463243444">+7 (3463) 24-34-44</a></dd>
               </div>
               <div>
-                <dt>Режим работы</dt>
-                <dd>Пн – Пт: 08:00–20:00 · Сб – Вс: выходной</dd>
+                <dt>Часы работы клиники</dt>
+                <dd>Понедельник – Пятница: 08:00–20:00</dd>
               </div>
             </dl>
           </div>
@@ -553,12 +554,84 @@
       </div>
     </section>
 
+    <!-- 7. CONTACTS & YANDEX MAP INTEGRATION SECTION -->
+    <section class="contacts-section" id="contacts" aria-labelledby="contacts-title">
+      <div class="container contacts__grid">
+        <div class="contacts__info">
+          <span class="section-kicker">КОНТАКТЫ И СХЕМА ПРОЕЗДА</span>
+          <h2 class="section-title" id="contacts-title">Ждём вас в <span class="title-accent">13-м микрорайоне</span></h2>
+          <p class="contacts__lead">
+            Клиника расположена в удобной части города с подъездом и парковкой рядом со входом. Позвоните нам или запишитесь онлайн на удобное время.
+          </p>
+
+          <div class="contacts__cards">
+            <div class="contact-card">
+              <span class="contact-card__label">Адрес стоматологии</span>
+              <strong class="contact-card__value">г. Нефтеюганск, 13-й микрорайон, д. 34</strong>
+              <span class="contact-card__note">Стоматологический центр «Маршалл»</span>
+            </div>
+
+            <div class="contact-card">
+              <span class="contact-card__label">Телефон регистратуры</span>
+              <a class="contact-card__value contact-card__value--link" href="tel:+73463243444">+7 (3463) 24-34-44</a>
+              <span class="contact-card__note">Быстрая запись на бесплатную консультацию</span>
+            </div>
+
+            <div class="contact-card">
+              <span class="contact-card__label">График работы</span>
+              <strong class="contact-card__value">Пн – Пт: 08:00–20:00</strong>
+              <span class="contact-card__note">Суббота и воскресенье — выходной</span>
+            </div>
+          </div>
+
+          <div class="contacts__actions">
+            <a class="btn btn--accent" href="tel:+73463243444">
+              <span>Позвонить в клинику</span>
+            </a>
+            <a class="btn btn--glass" href="https://yandex.ru/maps/?pt=72.628494,61.079115&z=17&l=map" target="_blank" rel="noopener noreferrer">
+              <span>Открыть в Яндекс Картах</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="map-widget">
+          <div class="map-widget__header">
+            <div class="map-widget__brand">
+              <img class="map-widget__logo" src="assets/logo-map.png" alt="Эмблема клиники Маршалл" width="38" height="38">
+              <div class="map-widget__title-wrap">
+                <strong class="map-widget__title">Мы на карте</strong>
+                <span class="map-widget__subtitle">Стоматология «Маршалл»</span>
+              </div>
+            </div>
+            <span class="map-widget__pin-badge">
+              <span class="pulse-dot"></span>
+              <span>13 мкр, д. 34</span>
+            </span>
+          </div>
+
+          <div class="map-widget__frame-wrap">
+            <iframe
+              class="map-widget__iframe"
+              src="https://yandex.ru/map-widget/v1/?ll=72.628494%2C61.079115&z=17&pt=72.628494,61.079115,pm2rdm"
+              title="Стоматология Маршалл на Яндекс Картах — г. Нефтеюганск, 13-й микрорайон, д. 34"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <span class="footer__wordmark">Marshall<sup>®</sup></span>
+        <div class="footer__brand-head">
+          <span class="footer__logo-box" aria-hidden="true"></span>
+          <span class="footer__wordmark">MARSHALL</span>
+        </div>
         <p>Стоматологический центр «Маршалл» · г. Нефтеюганск, 13-й микрорайон, д. 34 · +7 (3463) 24-34-44</p>
       </div>
       <div class="footer__meta">
@@ -566,6 +639,14 @@
       </div>
     </div>
   </footer>
+
+  <!-- BOTTOM DEMO CONCEPT BANNER -->
+  <div class="demo-banner demo-banner--bottom" role="note" aria-label="Уведомление о демо-концепте в подвале">
+    <div class="container demo-banner__inner">
+      <span class="demo-banner__badge">ДЕМО-КОНЦЕПТ</span>
+      <span class="demo-banner__text">Проект подготовлен в качестве демонстрационного концепта редизайна сайта для стоматологии «Маршалл» (г. Нефтеюганск).</span>
+    </div>
+  </div>
 
   <!-- GSAP + ScrollTrigger + Lenis Smooth Scroll -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
