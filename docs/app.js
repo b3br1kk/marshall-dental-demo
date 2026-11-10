@@ -305,66 +305,86 @@
       gsap.ticker.lagSmoothing(0);
     }
 
-    // 5.2 Preloader Curtain Reveal (Velde 00:03)
-    const tlEntry = gsap.timeline({
-      defaults: { ease: "power3.out" },
-      onComplete: () => {
-        if (preloader) preloader.classList.add("is-hidden");
-      }
-    });
+    // 5.2 Preloader Logo Handoff into Hero + Color Transition (White -> Black)
+    const preloaderBg = document.getElementById("preloader-bg");
+    const preloaderWord = document.getElementById("preloader-word");
+    const heroTitle = document.getElementById("hero-title");
 
-    tlEntry
-      .to(".preloader__inner", {
-        yPercent: -25,
-        opacity: 0,
-        duration: 0.45,
-        delay: 0.2
-      })
-      .to(
-        "#preloader",
-        {
-          yPercent: -100,
-          duration: 0.72,
-          ease: "power4.inOut"
-        },
-        "-=0.1"
-      )
-      .from(
-        "#hero-bg-img",
-        {
-          scale: 1.12,
-          duration: 1.35,
-          ease: "power3.out"
-        },
-        "-=0.55"
-      )
-      .from(
-        ".hero-reveal",
-        {
-          y: 28,
-          opacity: 0,
-          duration: 0.75,
-          stagger: 0.09
-        },
-        "-=0.95"
-      );
+    if (preloader && preloaderBg && preloaderWord && heroTitle && window.scrollY < 80) {
+      gsap.set(heroTitle, { opacity: 0 });
+
+      const preRect = preloaderWord.getBoundingClientRect();
+      const heroRect = heroTitle.getBoundingClientRect();
+      const dx = heroRect.left - preRect.left;
+      const dy = heroRect.top - preRect.top;
+
+      const tlEntry = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        onComplete: () => {
+          gsap.set(heroTitle, { opacity: 1 });
+          preloader.classList.add("is-hidden");
+        }
+      });
+
+      tlEntry
+        .to(
+          preloaderBg,
+          {
+            opacity: 0,
+            duration: 0.78,
+            ease: "power3.inOut",
+            delay: 0.25
+          }
+        )
+        .to(
+          preloaderWord,
+          {
+            x: dx,
+            y: dy,
+            color: "#121110",
+            duration: 0.88,
+            ease: "power4.inOut"
+          },
+          "<"
+        )
+        .add(() => {
+          gsap.set(heroTitle, { opacity: 1 });
+          preloader.classList.add("is-hidden");
+        })
+        .from(
+          ".hero-reveal",
+          {
+            y: 22,
+            opacity: 0,
+            duration: 0.65,
+            stagger: 0.08
+          },
+          "-=0.42"
+        );
+    } else if (preloader) {
+      preloader.classList.add("is-hidden");
+    }
 
     // 5.3 Desktop Scroll Choreography
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 1025px)", () => {
-      // A. Hero Subtle Parallax on Scroll
-      gsap.to("#hero-bg-img", {
-        yPercent: 10,
-        scale: 1.05,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".v-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: true
+      // A. Hero Subtle Parallax on Scroll (Zero-jump fromTo without scale conflict)
+      gsap.fromTo(
+        "#hero-bg-img",
+        { yPercent: 0 },
+        {
+          yPercent: 6,
+          ease: "none",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: ".v-hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+          }
         }
-      });
+      );
 
       // B. Vertical Sticky Stacking Cards (Velde "What we offer" 00:08–00:09)
       // Applied independently to both #services (#stack-cards) and #journey (#journey-stack-cards)
