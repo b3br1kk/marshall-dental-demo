@@ -140,21 +140,34 @@
         </aside>
       </div>
 
-      <!-- Bottom Trust & Features Strip inside Hero (Velde 00:04 bottom bar) -->
+      <!-- Bottom Animated Ticker Strip inside Hero (Right-to-Left Marquee) -->
       <div class="v-hero__bottom hero-reveal">
-        <div class="container v-hero__bottom-inner">
-          <div class="v-hero__free-pill">
-            <span class="pulse-dot"></span>
-            <div>
-              <strong>Консультация и план лечения — 0 ₽</strong>
-              <span>Не нужно заранее знать диагноз — врач сам всё подскажет на осмотре</span>
+        <div class="v-hero__ticker" aria-label="Преимущества стоматологии Маршалл">
+          <div class="v-hero__ticker-track">
+            <div class="v-hero__ticker-group">
+              <div class="v-hero__free-pill">
+                <span class="pulse-dot"></span>
+                <strong>Консультация и план лечения — 0 ₽</strong>
+                <span class="v-hero__free-sub">Не нужно заранее знать диагноз — врач сам всё подскажет на осмотре</span>
+              </div>
+              <span class="v-hero__ticker-item">— Свой 3D-снимок</span>
+              <span class="v-hero__ticker-item">— Мягкая анестезия</span>
+              <span class="v-hero__ticker-item">— Честная смета</span>
+              <span class="v-hero__ticker-item">— Гарантия по договору</span>
+              <span class="v-hero__ticker-item">— 13-й микрорайон, д. 34</span>
             </div>
-          </div>
-          <div class="v-hero__badges">
-            <span>Свой 3D-снимок</span>
-            <span>Мягкая анестезия</span>
-            <span>Честная смета</span>
-            <span>Гарантия по договору</span>
+            <div class="v-hero__ticker-group" aria-hidden="true">
+              <div class="v-hero__free-pill">
+                <span class="pulse-dot"></span>
+                <strong>Консультация и план лечения — 0 ₽</strong>
+                <span class="v-hero__free-sub">Не нужно заранее знать диагноз — врач сам всё подскажет на осмотре</span>
+              </div>
+              <span class="v-hero__ticker-item">— Свой 3D-снимок</span>
+              <span class="v-hero__ticker-item">— Мягкая анестезия</span>
+              <span class="v-hero__ticker-item">— Честная смета</span>
+              <span class="v-hero__ticker-item">— Гарантия по договору</span>
+              <span class="v-hero__ticker-item">— 13-й микрорайон, д. 34</span>
+            </div>
           </div>
         </div>
       </div>
@@ -163,18 +176,11 @@
     <!-- 2. SWISS 1PX ARCHITECTURAL MANIFESTO & GIANT NUMBERS (Velde 00:05) -->
     <section class="manifesto-section" id="about" aria-labelledby="about-title">
       <div class="container">
-        <div class="swiss-grid">
-          <div class="swiss-grid__label">
-            <span class="kicker-dot"></span>
-            <span>О КЛИНИКЕ · МАРШАЛЛ</span>
-          </div>
+        <div class="swiss-grid swiss-grid--single">
           <div class="swiss-grid__statement">
             <h2 class="manifesto-heading" id="about-title">
               Всё в одной клинике рядом с домом — <span class="title-accent">без беготни по городу</span> за снимками и без скрытых доплат в процессе лечения.
             </h2>
-            <p class="manifesto-sub">
-              Мы находимся в 13-м микрорайоне (дом 34). На первом бесплатном приёме врач спокойно осмотрит зубы, при необходимости сразу на месте сделает 3D-снимок и простыми словами объяснит варианты решения.
-            </p>
           </div>
         </div>
 
@@ -183,7 +189,6 @@
             <span class="swiss-metric__num">0 ₽</span>
             <div class="swiss-metric__meta">
               <strong>Первичный осмотр врача</strong>
-              <p>Бесплатная консультация и понятный план лечения до начала любых процедур</p>
             </div>
           </div>
 
@@ -191,7 +196,6 @@
             <span class="swiss-metric__num">5 мин</span>
             <div class="swiss-metric__meta">
               <strong>Свой 3D-снимок на месте</strong>
-              <p>Томограф находится прямо в клинике — никуда дополнительно ехать не нужно</p>
             </div>
           </div>
 
@@ -199,7 +203,6 @@
             <span class="swiss-metric__num">08–20</span>
             <div class="swiss-metric__meta">
               <strong>Удобный график по будням</strong>
-              <p>Принимаем с 08:00 утра до 20:00 вечера, чтобы вы легко успели после работы</p>
             </div>
           </div>
         </div>
@@ -242,9 +245,6 @@
             <span class="section-kicker section-kicker--light">УСЛУГИ И ПРОЗРАЧНЫЕ ЦЕНЫ</span>
             <h2 class="stack-header__title" id="services-title">Четыре основных <span class="title-accent">направления клиники</span></h2>
           </div>
-          <p class="stack-header__hint">
-            Вам не обязательно заранее знать название услуги. Можно выбрать подходящий вариант ниже или сразу записаться на <strong>бесплатную консультацию (0 ₽)</strong> — врач сам всё подскажет на осмотре.
-          </p>
         </div>
 
         <div class="stack-cards" id="stack-cards">
@@ -256,9 +256,6 @@
                 <span class="stack-card__price-pill">от 38 000 ₽ · Консультация 0 ₽</span>
               </div>
               <h3 class="stack-card__title">Имплантация и восстановление зуба</h3>
-              <p class="stack-card__desc">
-                Надёжный новый зуб на месте утраченного, который выглядит и ощущается как родной. Соседние здоровые зубы обтачивать не нужно.
-              </p>
               <ul class="stack-card__list">
                 <li><span>+</span> Бесплатный осмотр имплантолога и план лечения (0 ₽)</li>
                 <li><span>+</span> 3D-снимок челюсти прямо в клинике на месте</li>
@@ -285,9 +282,6 @@
                 <span class="stack-card__price-pill">от 26 000 ₽ · Консультация 0 ₽</span>
               </div>
               <h3 class="stack-card__title">Коронки и красивая улыбка</h3>
-              <p class="stack-card__desc">
-                Прочные и эстетичные коронки из циркония и керамики. Точно подбираем оттенок и форму, чтобы зуб не отличался от соседних.
-              </p>
               <ul class="stack-card__list">
                 <li><span>+</span> Первичный осмотр врача-ортопеда — бесплатно (0 ₽)</li>
                 <li><span>+</span> Восстановление сильно разрушенных зубов</li>
@@ -314,9 +308,6 @@
                 <span class="stack-card__price-pill">от 8 500 ₽ · Консультация 0 ₽</span>
               </div>
               <h3 class="stack-card__title">Бережное удаление и 3D-снимок</h3>
-              <p class="stack-card__desc">
-                Аккуратное и безболезненное удаление разрушенных зубов и сложных зубов мудрости под контролем трёхмерного снимка.
-              </p>
               <ul class="stack-card__list">
                 <li><span>+</span> Бесплатный осмотр хирурга перед процедурой (0 ₽)</li>
                 <li><span>+</span> Точный 3D-снимок корней прямо в клинике</li>
@@ -343,9 +334,6 @@
                 <span class="stack-card__price-pill">от 42 000 ₽ · Консультация 0 ₽</span>
               </div>
               <h3 class="stack-card__title">Выравнивание зубов и прикуса</h3>
-              <p class="stack-card__desc">
-                Комфортное выравнивание зубного ряда прозрачными съёмными капами (элайнерами) или современными аккуратными брекет-системами.
-              </p>
               <ul class="stack-card__list">
                 <li><span>+</span> Первичная консультация ортодонта — бесплатно (0 ₽)</li>
                 <li><span>+</span> Прозрачные капы, незаметные при общении</li>
@@ -486,9 +474,6 @@
             <span class="section-kicker">МНЕНИЯ ПАЦИЕНТОВ · НЕФТЕЮГАНСК</span>
             <h2 class="section-title" id="praise-title">За что чаще всего <span class="title-accent">хвалят клинику</span></h2>
           </div>
-          <p class="praise-header__sub">
-            Главные вещи, которые отмечают пациенты после первого визита и лечения в «Маршалл».
-          </p>
         </div>
 
         <!-- 4-Column 1px Architectural Grid (Velde 00:11, Anonymous Highlights) -->
@@ -548,9 +533,6 @@
             <span class="section-kicker">ПРОЗРАЧНЫЙ РАСЧЁТ И ЗАПИСЬ · ПЕРВЫЙ ОСМОТР 0 ₽</span>
             <h2 class="section-title" id="booking-title">Начнём с <span class="title-accent">бесплатного осмотра</span> и честной сметы.</h2>
           </div>
-          <p class="booking-light__sub">
-            Пощёлкайте по направлениям ниже, чтобы посмотреть ориентировочный чек-лист приёма, или сразу оставьте телефон — знать диагноз заранее не нужно.
-          </p>
         </div>
 
         <!-- Quick Service Switcher Pills for the Receipt -->
@@ -659,7 +641,7 @@
           <!-- RIGHT: Light Clean Booking Form -->
           <form class="booking-form booking-form--light" id="booking-form" novalidate>
             <div class="field">
-              <label for="inp-service">По какому вопросу хотите записаться? <span class="field__optional">(необязательно)</span></label>
+              <label for="inp-service">По какому вопросу хотите записаться?</label>
               <select id="inp-service" name="service">
                 <option value="Бесплатная консультация (врач подскажет на осмотре)" selected>Бесплатная консультация — врач сам подскажет на осмотре (0 ₽)</option>
                 <option value="Имплантация (восстановление зуба)">Имплантация (восстановление зуба)</option>
@@ -671,15 +653,14 @@
               <span class="field__hint" id="service-picked-hint">Первичный осмотр и составление плана лечения — бесплатно (0 ₽).</span>
             </div>
 
-            <div class="field-row">
-              <div class="field">
-                <label for="inp-name">Ваше имя</label>
-                <input id="inp-name" name="name" type="text" autocomplete="name" placeholder="Например, Анна" required>
-              </div>
-              <div class="field">
-                <label for="inp-phone">Номер телефона</label>
-                <input id="inp-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
-              </div>
+            <div class="field">
+              <label for="inp-name">Ваше имя</label>
+              <input id="inp-name" name="name" type="text" autocomplete="name" placeholder="Например, Анна" required>
+            </div>
+
+            <div class="field">
+              <label for="inp-phone">Номер телефона</label>
+              <input id="inp-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
             </div>
 
             <div class="field">
@@ -692,7 +673,7 @@
             </div>
 
             <button type="submit" class="btn btn--accent btn--full">
-              <span>Записаться на бесплатную консультацию</span>
+              <span>Записаться</span>
               <span aria-hidden="true">→</span>
             </button>
 
@@ -710,9 +691,6 @@
             <div>
               <span class="section-kicker section-kicker--light">КОНТАКТЫ И СХЕМА ПРОЕЗДА</span>
               <h2 class="finale-top__title" id="contacts-title">Ждём вас в <span class="title-accent">13-м микрорайоне</span></h2>
-              <p class="finale-top__lead">
-                Клиника расположена в удобной части города с подъездом и парковкой рядом со входом. Позвоните нам или приходите на бесплатный осмотр в удобное время.
-              </p>
             </div>
 
             <div class="contacts__cards contacts__cards--dark">
