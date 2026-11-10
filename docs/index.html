@@ -14,10 +14,11 @@
 </head>
 <body>
 
-  <!-- 0. PRELOADER REVEAL (Velde 00:03 -> Hero Wordmark Handoff) -->
+  <!-- 0. PRELOADER REVEAL (Velde 00:02.6 -> 00:04.2 Bottom-Up Curtain & Split Logo Handoff) -->
   <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader__bg" id="preloader-bg"></div>
-    <div class="preloader__word" id="preloader-word">Marshall<span class="reg-mark">®</span></div>
+    <div class="preloader__mask" id="preloader-mask">
+      <div class="preloader__word" id="preloader-word">Marshall<span class="reg-mark">®</span></div>
+    </div>
   </div>
 
   <!-- TOP DEMO CONCEPT BANNER -->
@@ -71,20 +72,23 @@
 
     <!-- 1. FULL-BLEED ARCHITECTURAL HERO (Velde 00:03–00:04) -->
     <section class="v-hero" aria-labelledby="hero-title">
-      <div class="v-hero__bg">
+      <div class="v-hero__bg" id="hero-bg-wrap">
         <img
           id="hero-bg-img"
           src="assets/hero-editorial.webp"
           alt="Консультация врача и пациента в светлом кабинете стоматологии Маршалл"
-          width="1800"
-          height="1080"
+          width="2200"
+          height="1228"
           fetchpriority="high"
         >
         <div class="v-hero__scrim"></div>
+        <div class="v-hero__grid" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
       </div>
 
       <!-- Top Coordinates Bar inside Hero (Velde 00:04 top hairline) -->
-      <div class="v-hero__topbar">
+      <div class="v-hero__topbar hero-reveal">
         <div class="container v-hero__topbar-inner">
           <span>Нефтеюганск · 13-й микрорайон, д. 34</span>
           <span>Пн – Пт · 08:00–20:00</span>
@@ -102,11 +106,11 @@
             Бережная стоматология без боли и навязывания лишних услуг. Бесплатно проведём первый осмотр, объясним всё простыми словами и назовём точную цену до начала лечения.
           </p>
           <div class="v-hero__actions hero-reveal">
-            <a class="btn btn--dark" href="#booking">
+            <a class="btn btn--light-hero" href="#booking">
               <span>Записаться на бесплатный осмотр</span>
               <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
-            <a class="btn btn--glass" href="#services">
+            <a class="btn btn--glass-hero" href="#services">
               <span>Услуги и цены</span>
             </a>
           </div>
@@ -137,7 +141,7 @@
       </div>
 
       <!-- Bottom Trust & Features Strip inside Hero (Velde 00:04 bottom bar) -->
-      <div class="v-hero__bottom">
+      <div class="v-hero__bottom hero-reveal">
         <div class="container v-hero__bottom-inner">
           <div class="v-hero__free-pill">
             <span class="pulse-dot"></span>
@@ -363,17 +367,17 @@
       </div>
     </section>
 
-    <!-- 5. HOW THE VISIT WORKS — LIGHT 50/50 SPLIT WITH UNROLLING IMAGE REVEALS (Velde 00:08.4–00:09.6) -->
+    <!-- 5. HOW THE VISIT WORKS — LIGHT 50/50 SPLIT WITH CONTINUOUS VERTICAL PHOTO STRIP (Velde 00:08.4–00:09.6) -->
     <section class="offer-section" id="journey" aria-labelledby="journey-title">
       <div class="container">
         <div class="offer-header">
           <div>
-            <span class="section-kicker">КАК ПРОХОДИТ ПРИЁМ · 4 ШАГА</span>
+            <span class="section-kicker">КАК ПРОХОДИТ ПРИЁМ · 4 ПРОСТЫХ ШАГА</span>
             <h2 class="section-title" id="journey-title">Не знаете, с чего начать? <span class="title-accent">Достаточно просто прийти</span></h2>
           </div>
           <div class="offer-header__right">
             <p class="offer-header__sub">
-              Спокойный и понятный маршрут от первого бесплатного осмотра (<strong>0 ₽</strong>) до готовой улыбки — без спешки, боли и навязывания лишних услуг.
+              Первый осмотр бесплатный (<strong>0 ₽</strong>) и ни к чему вас не обязывает.
             </p>
             <a class="offer-header__cta" href="#booking">
               <span>Записаться на бесплатный осмотр</span>
@@ -388,15 +392,13 @@
             <div class="offer-row__left">
               <div class="offer-row__text">
                 <span class="offer-row__num">01</span>
-                <h3 class="offer-row__title">Бесплатная консультация и осмотр</h3>
+                <h3 class="offer-row__title">Бесплатный осмотр врача</h3>
                 <p class="offer-row__desc">
-                  Вы просто приходите в удобное время. Врач бережно осмотрит зубы, выслушает вас и понятным человеческим языком расскажет, что нужно сделать в первую очередь.
+                  Врач бережно осмотрит зубы и простыми словами ответит на все ваши вопросы.
                 </p>
                 <ul class="offer-row__bullets">
-                  <li>Первичный осмотр и беседа с врачом — бесплатно (0 ₽)</li>
-                  <li>Не нужно заранее знать диагноз или название услуги</li>
-                  <li>Спокойная обстановка без давления и спешки</li>
-                  <li>Ответы на все вопросы простыми словами</li>
+                  <li>Первичный приём — 0 ₽</li>
+                  <li>Без спешки (20–30 минут)</li>
                 </ul>
               </div>
             </div>
@@ -412,15 +414,13 @@
             <div class="offer-row__left">
               <div class="offer-row__text">
                 <span class="offer-row__num">02</span>
-                <h3 class="offer-row__title">3D-снимок на месте и честная смета</h3>
+                <h3 class="offer-row__title">3D-снимок и точная цена</h3>
                 <p class="offer-row__desc">
-                  Если нужно увидеть корни и костную ткань, сразу в клинике делаем трёхмерный снимок. Вы заранее узнаёте точную сумму и сроки до старта лечения.
+                  Сразу в клинике сделаем снимок и назовём честную стоимость до начала лечения.
                 </p>
                 <ul class="offer-row__bullets">
-                  <li>Свой компьютерный 3D-томограф прямо в клинике</li>
-                  <li>Не нужно ездить за рентгеном в другие части города</li>
-                  <li>Понятный пошаговый план лечения на руки</li>
-                  <li>Фиксированная стоимость без скрытых доплат</li>
+                  <li>Свой 3D-томограф за 5 минут</li>
+                  <li>Фиксированная смета без доплат</li>
                 </ul>
               </div>
             </div>
@@ -436,15 +436,13 @@
             <div class="offer-row__left">
               <div class="offer-row__text">
                 <span class="offer-row__num">03</span>
-                <h3 class="offer-row__title">Бережное лечение без боли и страха</h3>
+                <h3 class="offer-row__title">Лечение без боли</h3>
                 <p class="offer-row__desc">
-                  Подбираем мягкое современное обезболивание и проводим все процедуры аккуратно, а оттенок новых коронок или пломб точно подстраиваем под ваши зубы.
+                  Подберём мягкую анестезию и проведём все процедуры в спокойном для вас темпе.
                 </p>
                 <ul class="offer-row__bullets">
-                  <li>Двухэтапная мягкая анестезия с проверкой действия</li>
-                  <li>Точный подбор естественного цвета и формы зуба</li>
-                  <li>Работа под увеличением для надёжного результата</li>
-                  <li>Приём в удобное время по будням с 08:00 до 20:00</li>
+                  <li>Двухэтапное обезболивание</li>
+                  <li>Естественный цвет и форма зубов</li>
                 </ul>
               </div>
             </div>
@@ -460,15 +458,13 @@
             <div class="offer-row__left">
               <div class="offer-row__text">
                 <span class="offer-row__num">04</span>
-                <h3 class="offer-row__title">Готовая улыбка и забота после приёма</h3>
+                <h3 class="offer-row__title">Готовая улыбка и гарантия</h3>
                 <p class="offer-row__desc">
-                  Проверяем, чтобы новым зубам было максимально удобно с первого дня, даём простые рекомендации по уходу и остаёмся на связи после лечения.
+                  Проверим удобство по прикусу, дадим рекомендации и пригласим на бесплатный контроль.
                 </p>
                 <ul class="offer-row__bullets">
-                  <li>Официальная гарантия клиники по договору</li>
-                  <li>Бесплатный контрольный осмотр после процедур</li>
-                  <li>Понятные рекомендации по домашнему уходу</li>
-                  <li>Внимательное сопровождение лечащего врача</li>
+                  <li>Официальная гарантия по договору</li>
+                  <li>Бесплатный контрольный осмотр</li>
                 </ul>
               </div>
             </div>
@@ -582,57 +578,66 @@
         </div>
 
         <div class="booking-light__grid">
-          <!-- LEFT: Interactive Perforated Clinic Receipt -->
-          <div class="receipt-card" id="clinic-receipt" aria-live="polite">
-            <div class="receipt-card__top">
-              <div class="receipt-card__brand">
-                <span class="receipt-card__title">СТОМАТОЛОГИЯ «МАРШАЛЛ»</span>
-                <span class="receipt-card__addr">г. Нефтеюганск, 13-й мкр, д. 34 · +7 (3463) 24-34-44</span>
-              </div>
-              <span class="receipt-card__badge" id="receipt-code">СМЕТА #00 · ОСМОТР</span>
+          <!-- LEFT: Interactive Thermal-Printer Clinic Receipt Dispenser -->
+          <div class="receipt-dispenser" id="receipt-dispenser">
+            <div class="receipt-dispenser__cap">
+              <span class="receipt-dispenser__hint">Выберите услугу выше</span>
+              <div class="receipt-dispenser__slot-lip" aria-hidden="true"></div>
             </div>
+            <div class="receipt-dispenser__viewport">
+              <div class="receipt-card" id="clinic-receipt" aria-live="polite">
+                <div class="receipt-card__top">
+                  <div class="receipt-card__brand">
+                    <span class="receipt-card__title">СТОМАТОЛОГИЯ «МАРШАЛЛ»</span>
+                    <span class="receipt-card__addr">г. Нефтеюганск, 13-й мкр, д. 34 · +7 (3463) 24-34-44</span>
+                  </div>
+                  <span class="receipt-card__badge" id="receipt-code">СМЕТА #00 · ОСМОТР</span>
+                </div>
 
-            <div class="receipt-card__divider"></div>
+                <div class="receipt-card__divider"></div>
 
-            <div class="receipt-card__subject">
-              <span class="receipt-card__label">Выбранный повод обращения</span>
-              <strong class="receipt-card__service-name" id="receipt-service-title">Бесплатная консультация — врач сам подскажет на осмотре</strong>
-            </div>
+                <div class="receipt-card__subject">
+                  <span class="receipt-card__label">Выбранный повод обращения</span>
+                  <strong class="receipt-card__service-name" id="receipt-service-title">Бесплатная консультация — врач сам подскажет на осмотре</strong>
+                </div>
 
-            <ul class="receipt-card__lines" id="receipt-lines">
-              <li>
-                <span>01. Первичный осмотр профильного врача (20–30 мин)</span>
-                <strong>0 ₽</strong>
-              </li>
-              <li>
-                <span>02. Составление пошагового плана и точной сметы</span>
-                <strong>0 ₽</strong>
-              </li>
-              <li>
-                <span>03. 3D-снимок на месте (при необходимости)</span>
-                <strong>по показаниям</strong>
-              </li>
-              <li>
-                <span>04. Обязательства до вашего согласия с планом</span>
-                <strong>нет</strong>
-              </li>
-            </ul>
+                <ul class="receipt-card__lines" id="receipt-lines">
+                  <li>
+                    <span>01. Первичный осмотр профильного врача (20–30 мин)</span>
+                    <strong>0 ₽</strong>
+                  </li>
+                  <li>
+                    <span>02. Составление пошагового плана и точной сметы</span>
+                    <strong>0 ₽</strong>
+                  </li>
+                  <li>
+                    <span>03. 3D-снимок на месте (при необходимости)</span>
+                    <strong>по показаниям</strong>
+                  </li>
+                  <li>
+                    <span>04. Обязательства до вашего согласия с планом</span>
+                    <strong>нет</strong>
+                  </li>
+                </ul>
 
-            <div class="receipt-card__divider receipt-card__divider--dashed"></div>
+                <div class="receipt-card__divider receipt-card__divider--dashed"></div>
 
-            <div class="receipt-card__totals">
-              <div class="receipt-card__total-row receipt-card__total-row--free">
-                <span>К оплате на первом визите (осмотр и план)</span>
-                <strong>0 ₽</strong>
+                <div class="receipt-card__totals">
+                  <div class="receipt-card__total-row receipt-card__total-row--free">
+                    <span>К оплате на первом визите (осмотр и план)</span>
+                    <strong>0 ₽</strong>
+                  </div>
+                  <div class="receipt-card__total-row">
+                    <span>Ориентир по выбранному лечению</span>
+                    <strong id="receipt-total-price">после осмотра врача</strong>
+                  </div>
+                </div>
+
+                <div class="receipt-card__foot">
+                  <span>* Итоговая цена фиксируется в договоре до начала любых процедур.</span>
+                </div>
+                <div class="receipt-card__sawtooth" aria-hidden="true"></div>
               </div>
-              <div class="receipt-card__total-row">
-                <span>Ориентир по выбранному лечению</span>
-                <strong id="receipt-total-price">после осмотра врача</strong>
-              </div>
-            </div>
-
-            <div class="receipt-card__foot">
-              <span>* Итоговая цена фиксируется в договоре до начала любых процедур.</span>
             </div>
           </div>
 
