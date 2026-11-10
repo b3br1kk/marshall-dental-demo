@@ -1,6 +1,6 @@
 /* ==========================================================================
    MARSHALL® — Velde® Architectural Edition
-   Lenis Smooth Scroll + GSAP ScrollTrigger Choreography + Micro-UI
+   Lenis Smooth Scroll + GSAP ScrollTrigger Choreography + Interactive Receipt
    ========================================================================== */
 
 (function () {
@@ -89,7 +89,7 @@
     requestAnimationFrame(() => setActiveNavLink(activeLink));
 
     // Scroll spy for header navigation sections
-    const sectionIds = ["#about", "#services", "#journey", "#praise", "#contacts"];
+    const sectionIds = ["#about", "#services", "#journey", "#praise", "#booking", "#contacts"];
     const sections = sectionIds
       .map((id) => document.querySelector(id))
       .filter(Boolean);
@@ -118,14 +118,124 @@
   }
 
   /* --------------------------------------------------------------------------
-     2. OPTIONAL SERVICE PICKER (Cards -> Booking Form Pre-select)
+     2. INTERACTIVE CLINIC RECEIPT & OPTIONAL SERVICE PICKER
      -------------------------------------------------------------------------- */
+  const RECEIPT_CATALOG = {
+    "Бесплатная консультация (врач подскажет на осмотре)": {
+      code: "СМЕТА #00 · ОСМОТР",
+      title: "Бесплатная консультация — врач сам подскажет на осмотре",
+      total: "после осмотра врача",
+      lines: [
+        ["01. Первичный осмотр профильного врача (20–30 мин)", "0 ₽"],
+        ["02. Составление пошагового плана и точной сметы", "0 ₽"],
+        ["03. 3D-снимок на месте (при необходимости)", "по показаниям"],
+        ["04. Обязательства до вашего согласия с планом", "нет"]
+      ]
+    },
+    "Имплантация (восстановление зуба)": {
+      code: "СМЕТА #01 · ИМПЛАНТАЦИЯ",
+      title: "Имплантация и восстановление зуба под ключ",
+      total: "от 38 000 ₽",
+      lines: [
+        ["01. Консультация хирурга-имплантолога и план лечения", "0 ₽"],
+        ["02. 3D-снимок челюсти прямо в клинике на месте", "в клинике"],
+        ["03. Установка имплантата под мягкой анестезией", "от 38 000 ₽"],
+        ["04. Контрольные осмотры после процедуры", "0 ₽"]
+      ]
+    },
+    "Коронки и эстетика улыбки": {
+      code: "СМЕТА #02 · КОРОНКИ",
+      title: "Циркониевые и керамические коронки естественного оттенка",
+      total: "от 26 000 ₽",
+      lines: [
+        ["01. Первичный осмотр врача-ортопеда и план", "0 ₽"],
+        ["02. Точный подбор цвета и формы под родные зубы", "включено"],
+        ["03. Коронка из диоксида циркония / керамики", "от 26 000 ₽"],
+        ["04. Примерка и комфортная посадка по прикусу", "включено"]
+      ]
+    },
+    "Бережное удаление зуба (в т.ч. зуба мудрости)": {
+      code: "СМЕТА #03 · ХИРУРГИЯ",
+      title: "Бережное удаление зуба и 3D-диагностика",
+      total: "от 8 500 ₽",
+      lines: [
+        ["01. Осмотр хирурга перед процедурой", "0 ₽"],
+        ["02. Трёхмерный снимок корней прямо в клинике", "5 минут"],
+        ["03. Аккуратное удаление под мягкой анестезией", "от 8 500 ₽"],
+        ["04. Контрольный осмотр после заживления", "0 ₽"]
+      ]
+    },
+    "3D-снимок зубов и диагностика": {
+      code: "СМЕТА #03 · 3D-СНИМОК",
+      title: "Компьютерный 3D-снимок зубов на месте в клинике",
+      total: "за 5 минут",
+      lines: [
+        ["01. Консультация врача и разбор снимка на экране", "0 ₽"],
+        ["02. 3D-томография прямо в 13-м микрорайоне", "на месте"],
+        ["03. Понятный план лечения и смета на руки", "0 ₽"],
+        ["04. Запись исследования", "включено"]
+      ]
+    },
+    "Выравнивание зубов (капы и брекеты)": {
+      code: "СМЕТА #04 · ПРИКУС",
+      title: "Выравнивание зубов прозрачными капами и брекетами",
+      total: "от 42 000 ₽",
+      lines: [
+        ["01. Первичная консультация врача-ортодонта", "0 ₽"],
+        ["02. Диагностика прикуса и расчёт сроков до старта", "в клинике"],
+        ["03. Курс выравнивания (элайнеры / брекет-система)", "от 42 000 ₽"],
+        ["04. Удобный график плановых посещений", "по договору"]
+      ]
+    }
+  };
+
   function initServicePicker() {
     const pickButtons = document.querySelectorAll(".js-pick-service");
+    const receiptTabs = Array.from(document.querySelectorAll(".receipt-tab"));
     const serviceSelect = document.getElementById("inp-service");
     const hintEl = document.getElementById("service-picked-hint");
 
+    const receiptCard = document.getElementById("clinic-receipt");
+    const receiptCodeEl = document.getElementById("receipt-code");
+    const receiptTitleEl = document.getElementById("receipt-service-title");
+    const receiptLinesEl = document.getElementById("receipt-lines");
+    const receiptTotalEl = document.getElementById("receipt-total-price");
+
     if (!serviceSelect) return;
+
+    function updateReceiptUI(serviceValue) {
+      const data =
+        RECEIPT_CATALOG[serviceValue] ||
+        RECEIPT_CATALOG["Бесплатная консультация (врач подскажет на осмотре)"];
+
+      if (receiptCodeEl) receiptCodeEl.textContent = data.code;
+      if (receiptTitleEl) receiptTitleEl.textContent = data.title;
+      if (receiptTotalEl) receiptTotalEl.textContent = data.total;
+
+      if (receiptLinesEl) {
+        receiptLinesEl.innerHTML = data.lines
+          .map(
+            ([label, price]) =>
+              `<li><span>${label}</span><strong>${price}</strong></li>`
+          )
+          .join("");
+      }
+
+      receiptTabs.forEach((tab) => {
+        tab.classList.toggle(
+          "is-active",
+          tab.getAttribute("data-receipt-service") === serviceValue
+        );
+      });
+
+      if (receiptCard && typeof window.gsap !== "undefined" && !prefersReducedMotion) {
+        window.gsap.fromTo(
+          receiptCard,
+          { y: 6, opacity: 0.82 },
+          { y: 0, opacity: 1, duration: 0.26, ease: "power2.out" }
+        );
+      }
+    }
 
     function selectServiceOption(serviceValue, shouldScroll) {
       let matched = false;
@@ -144,9 +254,19 @@
         serviceSelect.appendChild(customOpt);
       }
 
+      updateReceiptUI(serviceValue);
+
       if (hintEl) {
-        hintEl.textContent = `Выбрано направление: «${serviceValue}». Первичный осмотр врача — бесплатно (0 ₽).`;
-        hintEl.classList.add("is-highlighted");
+        if (
+          serviceValue === "Бесплатная консультация (врач подскажет на осмотре)"
+        ) {
+          hintEl.textContent =
+            "Первичный осмотр и составление плана лечения — бесплатно (0 ₽).";
+          hintEl.classList.remove("is-highlighted");
+        } else {
+          hintEl.textContent = `В чек и заявку выбрано: «${serviceValue}». Первичный осмотр врача — бесплатно (0 ₽).`;
+          hintEl.classList.add("is-highlighted");
+        }
       }
 
       if (shouldScroll) {
@@ -166,59 +286,20 @@
       });
     });
 
+    receiptTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const val = tab.getAttribute("data-receipt-service");
+        if (val) selectServiceOption(val, false);
+      });
+    });
+
     serviceSelect.addEventListener("change", () => {
-      if (!hintEl) return;
-      if (serviceSelect.selectedIndex === 0) {
-        hintEl.textContent =
-          "Первичный осмотр и составление плана лечения — бесплатно.";
-        hintEl.classList.remove("is-highlighted");
-      } else {
-        hintEl.textContent = `Выбрано: «${serviceSelect.value}». Первичный осмотр врача — бесплатно (0 ₽).`;
-        hintEl.classList.add("is-highlighted");
-      }
+      selectServiceOption(serviceSelect.value, false);
     });
   }
 
   /* --------------------------------------------------------------------------
-     3. PATIENT JOURNEY STEP SWITCHER (Manual Click + Scroll Sync)
-     -------------------------------------------------------------------------- */
-  let setActiveJourneyStep = null;
-
-  function initJourneySteps() {
-    const steps = Array.from(document.querySelectorAll(".j-step"));
-    const imgs = Array.from(document.querySelectorAll(".journey-img"));
-    if (!steps.length) return;
-
-    let currentStepIdx = 0;
-
-    setActiveJourneyStep = function (idx) {
-      const clampedIdx = Math.max(0, Math.min(steps.length - 1, idx));
-      if (clampedIdx === currentStepIdx) return;
-      currentStepIdx = clampedIdx;
-
-      steps.forEach((step, i) => {
-        const active = i === clampedIdx;
-        step.classList.toggle("is-open", active);
-        const btn = step.querySelector(".j-step__trigger");
-        if (btn) btn.setAttribute("aria-expanded", active ? "true" : "false");
-      });
-
-      imgs.forEach((img, i) => {
-        img.classList.toggle("is-active", i === clampedIdx);
-      });
-    };
-
-    steps.forEach((step, index) => {
-      const trigger = step.querySelector(".j-step__trigger");
-      if (!trigger) return;
-      trigger.addEventListener("click", () => {
-        if (setActiveJourneyStep) setActiveJourneyStep(index);
-      });
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     4. PHONE MASK & BOOKING FORM FEEDBACK
+     3. PHONE MASK & BOOKING FORM FEEDBACK
      -------------------------------------------------------------------------- */
   function initBookingForm() {
     const phoneInput = document.getElementById("inp-phone");
@@ -273,7 +354,7 @@
   }
 
   /* --------------------------------------------------------------------------
-     5. LENIS + GSAP SCROLLTRIGGER MACRO-CHOREOGRAPHY (Velde® Archetype)
+     4. LENIS + GSAP SCROLLTRIGGER MACRO-CHOREOGRAPHY (Velde® Archetype)
      -------------------------------------------------------------------------- */
   function initScrollChoreography() {
     const preloader = document.getElementById("preloader");
@@ -291,7 +372,7 @@
     const ScrollTrigger = window.ScrollTrigger;
     gsap.registerPlugin(ScrollTrigger);
 
-    // 5.1 Lenis Smooth Scroll
+    // 4.1 Lenis Smooth Scroll
     if (typeof window.Lenis !== "undefined") {
       lenisInstance = new window.Lenis({
         duration: 1.12,
@@ -305,7 +386,7 @@
       gsap.ticker.lagSmoothing(0);
     }
 
-    // 5.2 Preloader Logo Handoff into Hero + Color Transition (White -> Black)
+    // 4.2 Preloader Logo Handoff into Hero + Color Transition (White -> Black)
     const preloaderBg = document.getElementById("preloader-bg");
     const preloaderWord = document.getElementById("preloader-word");
     const heroTitle = document.getElementById("hero-title");
@@ -327,15 +408,12 @@
       });
 
       tlEntry
-        .to(
-          preloaderBg,
-          {
-            opacity: 0,
-            duration: 0.78,
-            ease: "power3.inOut",
-            delay: 0.25
-          }
-        )
+        .to(preloaderBg, {
+          opacity: 0,
+          duration: 0.78,
+          ease: "power3.inOut",
+          delay: 0.25
+        })
         .to(
           preloaderWord,
           {
@@ -365,7 +443,7 @@
       preloader.classList.add("is-hidden");
     }
 
-    // 5.3 Desktop Scroll Choreography
+    // 4.3 Desktop Scroll Choreography
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 1025px)", () => {
@@ -386,30 +464,85 @@
         }
       );
 
-      // B. Vertical Sticky Stacking Cards (Velde "What we offer" 00:08–00:09)
-      // Applied independently to both #services (#stack-cards) and #journey (#journey-stack-cards)
-      const stackContainers = gsap.utils.toArray(".stack-cards");
-      stackContainers.forEach((container) => {
-        const cards = Array.from(container.querySelectorAll(".stack-card"));
-        cards.forEach((card, index) => {
-          if (index === cards.length - 1) return;
-          const nextCard = cards[index + 1];
-          gsap.to(card, {
-            scale: 0.96,
-            filter: "brightness(0.62)",
+      // B. Vertical Sticky Stacking Cards in #services
+      // Cards stay 100% bright while being read, and only subtly recede when the next card covers their top half
+      const serviceCards = gsap.utils.toArray("#stack-cards .stack-card");
+      serviceCards.forEach((card, index) => {
+        if (index === serviceCards.length - 1) return;
+        const nextCard = serviceCards[index + 1];
+        gsap.fromTo(
+          card,
+          { scale: 1, filter: "brightness(1)" },
+          {
+            scale: 0.985,
+            filter: "brightness(0.88)",
             ease: "none",
+            immediateRender: false,
             scrollTrigger: {
               trigger: nextCard,
-              start: "top 85%",
-              end: "top 15%",
+              start: "top 34%",
+              end: "top 14%",
               scrub: true
             }
+          }
+        );
+      });
+
+      // C. Reference Video (00:08.4–00:09.6) 50/50 Split + Unrolling Image Reveals in #journey (.offer-row)
+      const offerRows = gsap.utils.toArray(".offer-row");
+      offerRows.forEach((row) => {
+        const textBlock = row.querySelector(".offer-row__text");
+        const mask = row.querySelector(".offer-row__mask");
+        const img = row.querySelector(".offer-row__mask img");
+
+        if (textBlock) {
+          gsap.from(textBlock, {
+            y: 36,
+            opacity: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: row,
+              start: "top 78%"
+            }
           });
-        });
+        }
+
+        if (mask && img) {
+          gsap.fromTo(
+            mask,
+            { clipPath: "inset(0% 0% 88% 0%)" },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              ease: "none",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 82%",
+                end: "top 28%",
+                scrub: 0.35
+              }
+            }
+          );
+
+          gsap.fromTo(
+            img,
+            { scale: 1.14 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 82%",
+                end: "top 25%",
+                scrub: 0.35
+              }
+            }
+          );
+        }
       });
     });
 
-    // 5.4 Section Stagger Reveals (Swiss Metrics, Praise Cards)
+    // 4.4 Section Stagger Reveals (Swiss Metrics, Praise Cards)
     gsap.from(".swiss-metric", {
       y: 24,
       opacity: 0,
@@ -441,7 +574,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     initSmoothAnchorsAndNav();
     initServicePicker();
-    initJourneySteps();
     initBookingForm();
     initScrollChoreography();
   });
